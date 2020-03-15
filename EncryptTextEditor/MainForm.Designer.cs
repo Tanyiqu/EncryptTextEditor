@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.statusLabelStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusLabelCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemNew = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSave = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.statusLabelStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLabelCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.textArea = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -56,6 +56,74 @@
             this.menuStrip.Size = new System.Drawing.Size(852, 25);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
+            // 
+            // menuFile
+            // 
+            this.menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemNew,
+            this.menuItemOpen,
+            this.menuItemSave,
+            this.menuItemSaveAs,
+            this.toolStripSeparator1,
+            this.menuItemExit});
+            this.menuFile.Name = "menuFile";
+            this.menuFile.Size = new System.Drawing.Size(53, 21);
+            this.menuFile.Text = "File(F)";
+            // 
+            // menuItemNew
+            // 
+            this.menuItemNew.Name = "menuItemNew";
+            this.menuItemNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.menuItemNew.Size = new System.Drawing.Size(215, 22);
+            this.menuItemNew.Text = "New(N)";
+            // 
+            // menuItemOpen
+            // 
+            this.menuItemOpen.Name = "menuItemOpen";
+            this.menuItemOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.menuItemOpen.Size = new System.Drawing.Size(215, 22);
+            this.menuItemOpen.Text = "Open(O)";
+            // 
+            // menuItemSave
+            // 
+            this.menuItemSave.Name = "menuItemSave";
+            this.menuItemSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.menuItemSave.Size = new System.Drawing.Size(215, 22);
+            this.menuItemSave.Text = "Save(S)";
+            this.menuItemSave.Click += new System.EventHandler(this.menuItemSave_Click);
+            // 
+            // menuItemSaveAs
+            // 
+            this.menuItemSaveAs.Name = "menuItemSaveAs";
+            this.menuItemSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.menuItemSaveAs.Size = new System.Drawing.Size(215, 22);
+            this.menuItemSaveAs.Text = "Save As(A)";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(212, 6);
+            // 
+            // menuItemExit
+            // 
+            this.menuItemExit.Name = "menuItemExit";
+            this.menuItemExit.Size = new System.Drawing.Size(215, 22);
+            this.menuItemExit.Text = "Exit(X)";
+            // 
+            // menuHelp
+            // 
+            this.menuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemAbout});
+            this.menuHelp.Name = "menuHelp";
+            this.menuHelp.Size = new System.Drawing.Size(64, 21);
+            this.menuHelp.Text = "Help(H)";
+            // 
+            // menuItemAbout
+            // 
+            this.menuItemAbout.Name = "menuItemAbout";
+            this.menuItemAbout.Size = new System.Drawing.Size(127, 22);
+            this.menuItemAbout.Text = "About(A)";
             // 
             // statusStrip
             // 
@@ -80,73 +148,6 @@
             this.statusLabelCount.Size = new System.Drawing.Size(65, 17);
             this.statusLabelCount.Text = "0/512字符";
             // 
-            // menuFile
-            // 
-            this.menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemNew,
-            this.menuItemOpen,
-            this.menuItemSave,
-            this.menuItemSaveAs,
-            this.toolStripSeparator1,
-            this.menuItemExit});
-            this.menuFile.Name = "menuFile";
-            this.menuFile.Size = new System.Drawing.Size(53, 21);
-            this.menuFile.Text = "File(F)";
-            // 
-            // menuHelp
-            // 
-            this.menuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemAbout});
-            this.menuHelp.Name = "menuHelp";
-            this.menuHelp.Size = new System.Drawing.Size(64, 21);
-            this.menuHelp.Text = "Help(H)";
-            // 
-            // menuItemAbout
-            // 
-            this.menuItemAbout.Name = "menuItemAbout";
-            this.menuItemAbout.Size = new System.Drawing.Size(152, 22);
-            this.menuItemAbout.Text = "About(A)";
-            // 
-            // menuItemNew
-            // 
-            this.menuItemNew.Name = "menuItemNew";
-            this.menuItemNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.menuItemNew.Size = new System.Drawing.Size(215, 22);
-            this.menuItemNew.Text = "New(N)";
-            // 
-            // menuItemOpen
-            // 
-            this.menuItemOpen.Name = "menuItemOpen";
-            this.menuItemOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.menuItemOpen.Size = new System.Drawing.Size(215, 22);
-            this.menuItemOpen.Text = "Open(O)";
-            // 
-            // menuItemSave
-            // 
-            this.menuItemSave.Name = "menuItemSave";
-            this.menuItemSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.menuItemSave.Size = new System.Drawing.Size(215, 22);
-            this.menuItemSave.Text = "Save(S)";
-            // 
-            // menuItemSaveAs
-            // 
-            this.menuItemSaveAs.Name = "menuItemSaveAs";
-            this.menuItemSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.S)));
-            this.menuItemSaveAs.Size = new System.Drawing.Size(215, 22);
-            this.menuItemSaveAs.Text = "Save As(A)";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // menuItemExit
-            // 
-            this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(152, 22);
-            this.menuItemExit.Text = "Exit(X)";
-            // 
             // textArea
             // 
             this.textArea.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -158,6 +159,7 @@
             this.textArea.Name = "textArea";
             this.textArea.Size = new System.Drawing.Size(852, 507);
             this.textArea.TabIndex = 2;
+            this.textArea.TextChanged += new System.EventHandler(this.textArea_TextChanged);
             // 
             // MainForm
             // 
@@ -170,6 +172,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.Text = "无标题 - EncryptTextEditor";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
