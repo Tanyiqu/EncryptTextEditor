@@ -111,6 +111,7 @@
             this.menuItemExit.Name = "menuItemExit";
             this.menuItemExit.Size = new System.Drawing.Size(215, 22);
             this.menuItemExit.Text = "Exit(X)";
+            this.menuItemExit.Click += new System.EventHandler(this.menuItemExit_Click);
             // 
             // menuHelp
             // 
@@ -175,6 +176,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.Text = "无标题 - EncryptTextEditor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();

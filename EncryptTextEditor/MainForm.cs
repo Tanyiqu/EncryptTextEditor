@@ -14,7 +14,7 @@ namespace EncryptTextEditor
     {
         string[] args;          //参数
         string filePath;        //打开的文件路径
-        bool modified = false;  //文本是否被改动过
+        bool modified = false;  //文本是否被改动过，在关闭窗口时用到
         bool openingFile = false;   //是否正在打开文件
         int wordCount = 0;      //文本区域的字数
         int warning = 512;      //字符数超过限制后的提醒
@@ -60,6 +60,31 @@ namespace EncryptTextEditor
             }
         }
 
+        //文本区域文本改动
+        private void textArea_TextChanged(object sender, EventArgs e)
+        {
+            //如果文本有改动，就记录下来，并且窗口标题加“*”
+            if (modified) ;
+            else
+            {
+                modified = true;
+                this.Text = "*" + this.Text;
+                statusLabelStatus.Text = "未保存";
+            }
+
+            //统计字数
+            this.wordCount = textArea.Text.Length;
+            statusLabelCount.Text = wordCount + "/" + warning + "字符";
+
+            //字符数过多的提醒
+            if (wordCount > warning)
+            {
+                MessageBox.Show("字符数已超过" + warning + "！\n文字过多可能影响保存效率！", "EncryptTextManager：警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                warning *= 2;
+                statusLabelCount.Text = wordCount + "/" + warning + "字符";
+            }
+        }
+
         //保存（Ctrl+S）
         private void menuItemSave_Click(object sender, EventArgs e)
         {
@@ -101,33 +126,8 @@ namespace EncryptTextEditor
                 this.Text = this.Text.Substring(1, this.Text.Length-1);
             }
             ////已经改动置为false
-            //modified = false;
+            modified = false;
             statusLabelStatus.Text = "已保存";
-        }
-
-        //文本区域文本改动
-        private void textArea_TextChanged(object sender, EventArgs e)
-        {
-            //如果文本有改动，就记录下来，并且窗口标题加“*”
-            if (modified) ;
-            else
-            {
-                modified = true;
-                this.Text = "*" + this.Text;
-                statusLabelStatus.Text = "未保存";
-            }
-
-            //统计字数
-            this.wordCount = textArea.Text.Length;
-            statusLabelCount.Text = wordCount + "/" + warning + "字符";
-
-            //字符数过多的提醒
-            if (wordCount > warning)
-            {
-                MessageBox.Show("字符数已超过" + warning + "！\n文字过多可能影响保存效率！", "EncryptTextManager：警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                warning *= 2;
-                statusLabelCount.Text = wordCount + "/" + warning + "字符";
-            }
         }
 
         //另存为（Ctrl + Shift + S）
@@ -143,9 +143,64 @@ namespace EncryptTextEditor
             openingFile = true;
             //修改标题名
             this.Text = Path.GetFileName(filePath) + " - " + Utils.APP_NAME;
-
+            modified = false;
             statusLabelStatus.Text = "已保存";
         }
+
+        //关闭（X）
+        private void menuItemExit_Click(object sender, EventArgs e)
+        {
+            //调用close关闭，关闭时的保存操作在closing中实现
+            this.Close();
+        }
+
+        //关闭
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //如果没有改动，直接关闭
+            if (!modified)
+            {
+                Console.WriteLine("无改动，直接关闭！");
+                return;
+            }
+            //有改动，分3种情况
+            Console.WriteLine("有改动");
+
+            DialogResult result = MessageBox.Show("你想保存更改到 无标题 吗？", Utils.APP_NAME, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+            //是：保存或另存为后关闭
+            if (result == DialogResult.Yes)
+            {
+                Console.WriteLine("是");
+                //保存成功正常关闭
+                menuItemSave_Click(null, null);
+                //保存正常
+                if (saveFlag)
+                {
+                    return;
+                }
+                //保存失败暂时不关闭
+                else
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+            //否：不保存，关闭
+            else if (result == DialogResult.No)
+            {
+                Console.WriteLine("否");
+                return;
+            }
+            //取消：不保存，取消关闭
+            else
+            {
+                Console.WriteLine("取消");
+                e.Cancel = true;
+            }
+        }
+
+
 
     }
 }
