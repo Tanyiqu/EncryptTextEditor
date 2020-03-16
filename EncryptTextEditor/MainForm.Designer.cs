@@ -99,6 +99,7 @@
             | System.Windows.Forms.Keys.S)));
             this.menuItemSaveAs.Size = new System.Drawing.Size(215, 22);
             this.menuItemSaveAs.Text = "Save As(A)";
+            this.menuItemSaveAs.Click += new System.EventHandler(this.menuItemSaveAs_Click);
             // 
             // toolStripSeparator1
             // 
@@ -157,8 +158,10 @@
             this.textArea.Margin = new System.Windows.Forms.Padding(0);
             this.textArea.Multiline = true;
             this.textArea.Name = "textArea";
+            this.textArea.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textArea.Size = new System.Drawing.Size(852, 507);
             this.textArea.TabIndex = 2;
+            this.textArea.WordWrap = false;
             this.textArea.TextChanged += new System.EventHandler(this.textArea_TextChanged);
             // 
             // MainForm

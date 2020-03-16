@@ -74,6 +74,7 @@ namespace EncryptTextEditor
                 {
                     MessageBox.Show("文件保存错误！请尽快备份内容！\n", "EncryptTextManager：错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
+
                 }
             }
             //另存为
@@ -99,10 +100,9 @@ namespace EncryptTextEditor
             {
                 this.Text = this.Text.Substring(1, this.Text.Length-1);
             }
-            //已经改动置为false
-            modified = false;
+            ////已经改动置为false
+            //modified = false;
             statusLabelStatus.Text = "已保存";
-
         }
 
         //文本区域文本改动
@@ -128,6 +128,23 @@ namespace EncryptTextEditor
                 warning *= 2;
                 statusLabelCount.Text = wordCount + "/" + warning + "字符";
             }
+        }
+
+        //另存为（Ctrl + Shift + S）
+        private void menuItemSaveAs_Click(object sender, EventArgs e)
+        {
+            saveFlag = Utils.saveAsFile(textArea.Text, openingFile, ref filePath);
+            if (!saveFlag)//保存失败
+            {
+                MessageBox.Show("未保存成功！请尽快备份内容！\n", "EncryptTextManager：警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            //保存完成，此时一定有已经打开的文件
+            openingFile = true;
+            //修改标题名
+            this.Text = Path.GetFileName(filePath) + " - " + Utils.APP_NAME;
+
+            statusLabelStatus.Text = "已保存";
         }
 
     }
