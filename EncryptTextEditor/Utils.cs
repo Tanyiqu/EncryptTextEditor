@@ -10,7 +10,7 @@ namespace EncryptTextEditor
     public static class Utils
     {
 
-        public static string APP_NAME = "EncryptTextManager";
+        public static string APP_NAME = "EncryptTextEditor";
 
         //仅保存文本到指定路径
         //返回保存是否成功
