@@ -19,6 +19,7 @@ namespace EncryptTextEditor
         int wordCount = 0;      //文本区域的字数
         int warning = 512;      //字符数超过限制后的提醒
         bool saveFlag = false;  //保存情况
+        Configuration config = Configuration.Instance;//配置
 
         public MainForm(string[] args)
         {
@@ -36,7 +37,6 @@ namespace EncryptTextEditor
                 //正常显示
                 openingFile = false;
                 filePath = null;
-
             }
             else if (args.Length == 1)
             {
@@ -44,7 +44,6 @@ namespace EncryptTextEditor
                 filePath = args[0];
                 openingFile = true;
                 Console.WriteLine("打开文件：[" + filePath + "]");
-
                 
                 //打开文件
                 openFile();
@@ -57,6 +56,8 @@ namespace EncryptTextEditor
                 //强制关闭程序
                 System.Environment.Exit(0);
             }
+            //加载设置（字体、主题等）
+            loadConf();
         }
 
         //文本区域文本改动
@@ -191,8 +192,6 @@ namespace EncryptTextEditor
             openingFile = true;
             filePath = tmpPath;
             openFile();
-            
-
         }
 
         //保存（Ctrl + S）

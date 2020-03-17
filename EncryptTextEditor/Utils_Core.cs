@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+/*****************************************
+核心加密解密算法
+*****************************************/
+
 namespace EncryptTextEditor
 {
     public static partial class Utils

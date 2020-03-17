@@ -35,6 +35,8 @@
             this.menuItemSave = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemOpenInExplorer = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,8 +44,9 @@
             this.statusLabelStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.textArea = new System.Windows.Forms.TextBox();
-            this.menuItemOpenInExplorer = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuFormat = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFont = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemTheme = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +55,7 @@
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuFile,
+            this.menuFormat,
             this.menuHelp});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -112,6 +116,18 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(203, 6);
             // 
+            // menuItemOpenInExplorer
+            // 
+            this.menuItemOpenInExplorer.Name = "menuItemOpenInExplorer";
+            this.menuItemOpenInExplorer.Size = new System.Drawing.Size(206, 22);
+            this.menuItemOpenInExplorer.Text = "打开文件位置";
+            this.menuItemOpenInExplorer.Click += new System.EventHandler(this.menuItemOpenInExplorer_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(203, 6);
+            // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
@@ -171,17 +187,26 @@
             this.textArea.WordWrap = false;
             this.textArea.TextChanged += new System.EventHandler(this.textArea_TextChanged);
             // 
-            // menuItemOpenInExplorer
+            // menuFormat
             // 
-            this.menuItemOpenInExplorer.Name = "menuItemOpenInExplorer";
-            this.menuItemOpenInExplorer.Size = new System.Drawing.Size(206, 22);
-            this.menuItemOpenInExplorer.Text = "打开文件位置";
-            this.menuItemOpenInExplorer.Click += new System.EventHandler(this.menuItemOpenInExplorer_Click);
+            this.menuFormat.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemFont,
+            this.menuItemTheme});
+            this.menuFormat.Name = "menuFormat";
+            this.menuFormat.Size = new System.Drawing.Size(62, 21);
+            this.menuFormat.Text = "格式(O)";
             // 
-            // toolStripSeparator2
+            // menuItemFont
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(203, 6);
+            this.menuItemFont.Name = "menuItemFont";
+            this.menuItemFont.Size = new System.Drawing.Size(152, 22);
+            this.menuItemFont.Text = "字体(F)";
+            // 
+            // menuItemTheme
+            // 
+            this.menuItemTheme.Name = "menuItemTheme";
+            this.menuItemTheme.Size = new System.Drawing.Size(152, 22);
+            this.menuItemTheme.Text = "主题(T)";
             // 
             // MainForm
             // 
@@ -223,6 +248,9 @@
         private System.Windows.Forms.TextBox textArea;
         private System.Windows.Forms.ToolStripMenuItem menuItemOpenInExplorer;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem menuFormat;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFont;
+        private System.Windows.Forms.ToolStripMenuItem menuItemTheme;
     }
 }
 
