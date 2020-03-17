@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace EncryptTextEditor
 {
-    public static class Utils
+    public static partial class Utils
     {
 
         public static string APP_NAME = "EncryptTextEditor";
@@ -63,22 +63,19 @@ namespace EncryptTextEditor
             return saveFile(text,tempPath);
         }
 
-
-        /// <summary>
-        /// 字符串加密成字节数组
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        public static byte[] encode(string text)
+        //读取文件，返回读到的字节数组
+        public static byte[] readFile(string path)
         {
-            byte[] arr = System.Text.Encoding.Default.GetBytes(text);
-            byte[] arr2 = new byte[arr.Length];
-            byte k = 0x55;
-            for (int i = 0; i < arr.Length; i++)
-            {
-                arr2[i] = (byte)(arr[i] ^ k);
-            }
-            return arr2;
+            FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            byte[] arr = new byte[fs.Length];
+            fs.Read(arr, 0, (int)fs.Length);
+            fs.Close();
+            return arr;
         }
+
+
+        //打开文件
+
+
     }
 }

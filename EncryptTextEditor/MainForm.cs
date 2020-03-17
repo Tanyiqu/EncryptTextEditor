@@ -45,10 +45,9 @@ namespace EncryptTextEditor
                 openingFile = true;
                 Console.WriteLine("打开文件：[" + filePath + "]");
 
-                //改变标题
-                this.Text = Path.GetFileName(filePath) + " - " + Utils.APP_NAME;
+                
                 //打开文件
-
+                openFile();
             }
             else
             {
@@ -135,6 +134,67 @@ namespace EncryptTextEditor
             modified = false;
         }
 
+        //打开（Ctrl + O）
+        private void menuItemOpen_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("Ctrl + O");
+            //1.有改动（未保存）
+            //2.没有改动（已保存 或 新打开的窗口）
+
+            //有改动，保存或另存为后选择文件打开
+            if(modified)
+            {
+                //保存或另存为后，再新建
+                DialogResult result = MessageBox.Show("你想保存更改吗？", Utils.APP_NAME, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                //是：保存或另存为后打开文件
+                if (result == DialogResult.Yes)
+                {
+                    Console.WriteLine("是");
+                    //保存成功正常关闭
+                    menuItemSave_Click(null, null);
+                    //如果未保存成功，暂时取消新建
+                    if (!saveFlag)//此处不做提示信息，因为menuItemSave_Click中已经做了提示
+                    {
+                        return;
+                    }
+                }
+
+                //否：不保存，直接打开文件
+                else if (result == DialogResult.No)
+                {
+                    Console.WriteLine("否");
+                }
+                //取消：不保存，取消打开
+                else
+                {
+                    Console.WriteLine("取消");
+                    return;
+                }
+            }
+
+            //没有改动，就直接选择文件打开
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "打开";
+            ofd.Filter = "加密文本文件|*.ept|账户文件|*.act";
+            ofd.ShowDialog();
+
+            string tmpPath = ofd.FileName;
+
+            //未选择文件，当做什么没发生
+            if(tmpPath.Equals(""))
+            {
+                return;
+            }
+
+            //打开所选文件
+            openingFile = true;
+            filePath = tmpPath;
+            openFile();
+            
+
+        }
+
         //保存（Ctrl + S）
         private void menuItemSave_Click(object sender, EventArgs e)
         {
@@ -199,6 +259,18 @@ namespace EncryptTextEditor
             statusLabelStatus.Text = "已保存";
         }
 
+        //打开文件位置
+        private void menuItemOpenInExplorer_Click(object sender, EventArgs e)
+        {
+            if (filePath == null)
+                return;
+            //获取所在路径
+            string parentPath = Path.GetDirectoryName(filePath);
+            Console.WriteLine(parentPath);
+            //打开此路径
+            System.Diagnostics.Process.Start(parentPath);
+        }
+
         //点击关闭（X）
         private void menuItemExit_Click(object sender, EventArgs e)
         {
@@ -250,6 +322,38 @@ namespace EncryptTextEditor
                 Console.WriteLine("取消");
                 e.Cancel = true;
             }
+        }
+
+
+        //打开文件
+        private void openFile()
+        {
+            //获取已打开文件的字节数组
+            byte[] arr = Utils.readFile(filePath);
+            //解码成字符串
+            string text = Utils.decode(arr);
+
+            //在显示文本之前，调整warning限制字符数
+            while(warning < text.Length)
+            {
+                warning *= 2;
+            }
+
+            //显示文本
+            textArea.Text = text;
+            textArea.SelectionLength = 0;
+            textArea.SelectionStart = 0;
+
+            //由于文本区域有改动，需要消掉标题的“*”和状态栏的“未保存”
+            if (this.Text[0] == '*')
+            {
+                this.Text = this.Text.Substring(1, this.Text.Length - 1);
+            }
+            ////已经改动置为false
+            modified = false;
+            statusLabelStatus.Text = "已保存";
+            //改变标题
+            this.Text = Path.GetFileName(filePath) + " - " + Utils.APP_NAME;
         }
 
 

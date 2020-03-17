@@ -42,6 +42,8 @@
             this.statusLabelStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.textArea = new System.Windows.Forms.TextBox();
+            this.menuItemOpenInExplorer = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -65,32 +67,35 @@
             this.menuItemSave,
             this.menuItemSaveAs,
             this.toolStripSeparator1,
+            this.menuItemOpenInExplorer,
+            this.toolStripSeparator2,
             this.menuItemExit});
             this.menuFile.Name = "menuFile";
-            this.menuFile.Size = new System.Drawing.Size(53, 21);
-            this.menuFile.Text = "File(F)";
+            this.menuFile.Size = new System.Drawing.Size(58, 21);
+            this.menuFile.Text = "文件(F)";
             // 
             // menuItemNew
             // 
             this.menuItemNew.Name = "menuItemNew";
             this.menuItemNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.menuItemNew.Size = new System.Drawing.Size(215, 22);
-            this.menuItemNew.Text = "New(N)";
+            this.menuItemNew.Size = new System.Drawing.Size(206, 22);
+            this.menuItemNew.Text = "新建(N)";
             this.menuItemNew.Click += new System.EventHandler(this.menuItemNew_Click);
             // 
             // menuItemOpen
             // 
             this.menuItemOpen.Name = "menuItemOpen";
             this.menuItemOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.menuItemOpen.Size = new System.Drawing.Size(215, 22);
-            this.menuItemOpen.Text = "Open(O)";
+            this.menuItemOpen.Size = new System.Drawing.Size(206, 22);
+            this.menuItemOpen.Text = "打开(O)";
+            this.menuItemOpen.Click += new System.EventHandler(this.menuItemOpen_Click);
             // 
             // menuItemSave
             // 
             this.menuItemSave.Name = "menuItemSave";
             this.menuItemSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.menuItemSave.Size = new System.Drawing.Size(215, 22);
-            this.menuItemSave.Text = "Save(S)";
+            this.menuItemSave.Size = new System.Drawing.Size(206, 22);
+            this.menuItemSave.Text = "保存(S)";
             this.menuItemSave.Click += new System.EventHandler(this.menuItemSave_Click);
             // 
             // menuItemSaveAs
@@ -98,20 +103,20 @@
             this.menuItemSaveAs.Name = "menuItemSaveAs";
             this.menuItemSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.menuItemSaveAs.Size = new System.Drawing.Size(215, 22);
-            this.menuItemSaveAs.Text = "Save As(A)";
+            this.menuItemSaveAs.Size = new System.Drawing.Size(206, 22);
+            this.menuItemSaveAs.Text = "另存为(A)";
             this.menuItemSaveAs.Click += new System.EventHandler(this.menuItemSaveAs_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(212, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(203, 6);
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(215, 22);
-            this.menuItemExit.Text = "Exit(X)";
+            this.menuItemExit.Size = new System.Drawing.Size(206, 22);
+            this.menuItemExit.Text = "退出(X)";
             this.menuItemExit.Click += new System.EventHandler(this.menuItemExit_Click);
             // 
             // menuHelp
@@ -119,14 +124,14 @@
             this.menuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemAbout});
             this.menuHelp.Name = "menuHelp";
-            this.menuHelp.Size = new System.Drawing.Size(64, 21);
-            this.menuHelp.Text = "Help(H)";
+            this.menuHelp.Size = new System.Drawing.Size(61, 21);
+            this.menuHelp.Text = "帮助(H)";
             // 
             // menuItemAbout
             // 
             this.menuItemAbout.Name = "menuItemAbout";
-            this.menuItemAbout.Size = new System.Drawing.Size(127, 22);
-            this.menuItemAbout.Text = "About(A)";
+            this.menuItemAbout.Size = new System.Drawing.Size(152, 22);
+            this.menuItemAbout.Text = "关于(A)";
             // 
             // statusStrip
             // 
@@ -166,6 +171,18 @@
             this.textArea.WordWrap = false;
             this.textArea.TextChanged += new System.EventHandler(this.textArea_TextChanged);
             // 
+            // menuItemOpenInExplorer
+            // 
+            this.menuItemOpenInExplorer.Name = "menuItemOpenInExplorer";
+            this.menuItemOpenInExplorer.Size = new System.Drawing.Size(206, 22);
+            this.menuItemOpenInExplorer.Text = "打开文件位置";
+            this.menuItemOpenInExplorer.Click += new System.EventHandler(this.menuItemOpenInExplorer_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(203, 6);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -204,6 +221,8 @@
         private System.Windows.Forms.ToolStripMenuItem menuHelp;
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
         private System.Windows.Forms.TextBox textArea;
+        private System.Windows.Forms.ToolStripMenuItem menuItemOpenInExplorer;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 
