@@ -355,6 +355,27 @@ namespace EncryptTextEditor
             this.Text = Path.GetFileName(filePath) + " - " + Utils.APP_NAME;
         }
 
+        //字体（F）
+        private void menuItemFont_Click(object sender, EventArgs e)
+        {
+            FontDialog fontDialog = new FontDialog();
+            //设置字体为当前文本的字体
+            fontDialog.Font = textArea.Font;
+
+            if(fontDialog.ShowDialog() == DialogResult.OK)
+            {
+                textArea.Font = fontDialog.Font;
+            }
+
+        }
+
+        //恢复默认字体
+        private void menuItemDefaultFont_Click(object sender, EventArgs e)
+        {
+            Font font = new Font("微软雅黑", 12);
+            textArea.Font = font;
+        }
+
 
     }
 }

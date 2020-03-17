@@ -47,6 +47,10 @@
             this.menuFormat = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemFont = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemTheme = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemDefault = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDefaultFont = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDefaultTheme = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -191,7 +195,9 @@
             // 
             this.menuFormat.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemFont,
-            this.menuItemTheme});
+            this.menuItemTheme,
+            this.toolStripSeparator3,
+            this.menuItemDefault});
             this.menuFormat.Name = "menuFormat";
             this.menuFormat.Size = new System.Drawing.Size(62, 21);
             this.menuFormat.Text = "格式(O)";
@@ -201,12 +207,40 @@
             this.menuItemFont.Name = "menuItemFont";
             this.menuItemFont.Size = new System.Drawing.Size(152, 22);
             this.menuItemFont.Text = "字体(F)";
+            this.menuItemFont.Click += new System.EventHandler(this.menuItemFont_Click);
             // 
             // menuItemTheme
             // 
             this.menuItemTheme.Name = "menuItemTheme";
             this.menuItemTheme.Size = new System.Drawing.Size(152, 22);
             this.menuItemTheme.Text = "主题(T)";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            // 
+            // menuItemDefault
+            // 
+            this.menuItemDefault.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemDefaultFont,
+            this.menuItemDefaultTheme});
+            this.menuItemDefault.Name = "menuItemDefault";
+            this.menuItemDefault.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDefault.Text = "恢复默认";
+            // 
+            // menuItemDefaultFont
+            // 
+            this.menuItemDefaultFont.Name = "menuItemDefaultFont";
+            this.menuItemDefaultFont.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDefaultFont.Text = "默认字体";
+            this.menuItemDefaultFont.Click += new System.EventHandler(this.menuItemDefaultFont_Click);
+            // 
+            // menuItemDefaultTheme
+            // 
+            this.menuItemDefaultTheme.Name = "menuItemDefaultTheme";
+            this.menuItemDefaultTheme.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDefaultTheme.Text = "默认主题";
             // 
             // MainForm
             // 
@@ -251,6 +285,10 @@
         private System.Windows.Forms.ToolStripMenuItem menuFormat;
         private System.Windows.Forms.ToolStripMenuItem menuItemFont;
         private System.Windows.Forms.ToolStripMenuItem menuItemTheme;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDefault;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDefaultFont;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDefaultTheme;
     }
 }
 

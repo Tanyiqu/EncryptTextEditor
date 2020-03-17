@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -16,7 +17,7 @@ namespace EncryptTextEditor
 
         public int width, height;   //窗口宽高
         public int x, y;            //窗口出现的位置
-
+        public Font font;           //字体
 
         private Configuration()
         {
@@ -27,7 +28,7 @@ namespace EncryptTextEditor
             height = 593;
             x = 700;
             y = 300;
-
+            font = new Font("微软雅黑",12);
         }
 
         //获取实例

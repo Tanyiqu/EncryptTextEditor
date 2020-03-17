@@ -23,7 +23,17 @@ namespace EncryptTextEditor
             //窗口位置
             this.Location = new Point(config.x, config.y);
 
+            //字体
+            //FontDialog fontDialog = new FontDialog();
+            //fontDialog.Font = textArea.Font;
 
+            //fontDialog.ShowDialog();
+            //Font font = fontDialog.Font;
+            //Console.WriteLine(font.ToString());
+
+            textArea.Font = config.font;
+
+            
 
         }
     }
