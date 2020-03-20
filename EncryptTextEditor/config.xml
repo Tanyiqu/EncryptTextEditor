@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <app>
+    <width>868</width>
+    <height>593</height>
+    <x>700</x>
+    <y>300</y>
+    <font>
+      <family>微软雅黑</family>
+      <size>12</size>
+    </font>
+  </app>
+</config>

@@ -24,14 +24,7 @@ namespace EncryptTextEditor
             this.Location = new Point(config.x, config.y);
 
             //字体
-            //FontDialog fontDialog = new FontDialog();
-            //fontDialog.Font = textArea.Font;
-
-            //fontDialog.ShowDialog();
-            //Font font = fontDialog.Font;
-            //Console.WriteLine(font.ToString());
-
-            textArea.Font = config.font;
+            this.textArea.Font = config.font;
 
             
 
