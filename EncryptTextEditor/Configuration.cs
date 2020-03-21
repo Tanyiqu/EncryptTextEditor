@@ -86,11 +86,19 @@ namespace EncryptTextEditor
                     case "font":
                         string family = elem.SelectSingleNode("family").InnerText;
                         int size = Int32.Parse(elem.SelectSingleNode("size").InnerText);
-                        this.font = new Font(family, size);
+                        FontStyle fontStyle = FontStyle.Bold | FontStyle.Italic | FontStyle.Strikeout | FontStyle.Underline;
+                        if (!Boolean.Parse(elem.SelectSingleNode("bold").InnerText))
+                            fontStyle ^= FontStyle.Bold;
+                        if (!Boolean.Parse(elem.SelectSingleNode("italic").InnerText))
+                            fontStyle ^= FontStyle.Italic;
+                        if (!Boolean.Parse(elem.SelectSingleNode("strikeout").InnerText))
+                            fontStyle ^= FontStyle.Strikeout;
+                        if (!Boolean.Parse(elem.SelectSingleNode("underline").InnerText))
+                            fontStyle ^= FontStyle.Underline;
+                        this.font = new Font(family, size, fontStyle);
                         break;
                 }
             }
-
 
             //this.width = Int32.Parse(node.SelectSingleNode("width").InnerText);
 
@@ -99,7 +107,18 @@ namespace EncryptTextEditor
             //XmlNode fontNode = node.SelectSingleNode("font");
             //string family = fontNode.SelectSingleNode("family").InnerText;
             //int size = Int32.Parse(fontNode.SelectSingleNode("size").InnerText);
-            //this.font = new Font(family, size);
+
+            //FontStyle fontStyle = FontStyle.Bold | FontStyle.Italic | FontStyle.Strikeout | FontStyle.Underline;
+            //if (!Boolean.Parse(fontNode.SelectSingleNode("bold").InnerText))
+            //    fontStyle ^= FontStyle.Bold;
+            //if (!Boolean.Parse(fontNode.SelectSingleNode("italic").InnerText))
+            //    fontStyle ^= FontStyle.Italic;
+            //if (!Boolean.Parse(fontNode.SelectSingleNode("strikeout").InnerText))
+            //    fontStyle ^= FontStyle.Strikeout;
+            //if (!Boolean.Parse(fontNode.SelectSingleNode("underline").InnerText))
+            //    fontStyle ^= FontStyle.Underline;
+
+            //this.font = new Font(family, size, fontStyle);
 
             sw.Stop();
             Console.WriteLine(sw.Elapsed);

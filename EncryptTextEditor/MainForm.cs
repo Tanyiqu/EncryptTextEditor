@@ -365,6 +365,11 @@ namespace EncryptTextEditor
             if(fontDialog.ShowDialog() == DialogResult.OK)
             {
                 textArea.Font = fontDialog.Font;
+                Console.WriteLine(textArea.Font.ToString());
+                Console.WriteLine("Italic : " + textArea.Font.Italic);
+                Console.WriteLine("Bold : " + textArea.Font.Bold);
+                Console.WriteLine("Strikeout : " + textArea.Font.Strikeout);
+                Console.WriteLine("Underline : " + textArea.Font.Underline);
             }
 
         }

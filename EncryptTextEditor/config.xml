@@ -8,6 +8,10 @@
     <font>
       <family>微软雅黑</family>
       <size>12</size>
+      <bold>false</bold>
+      <italic>false</italic>
+      <strikeout>false</strikeout>
+      <underline>true</underline>
     </font>
   </app>
 </config>
