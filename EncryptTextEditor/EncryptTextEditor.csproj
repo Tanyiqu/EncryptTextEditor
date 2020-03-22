@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyExceptions\WriteConfigXmlException.cs" />
     <Compile Include="MainForm_Config.cs">
       <SubType>Form</SubType>
     </Compile>

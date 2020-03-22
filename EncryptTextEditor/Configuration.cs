@@ -17,11 +17,11 @@ namespace EncryptTextEditor
     {
         private static Configuration instance = null;
         private static readonly object padlock = new object();
-        private static string XML_PATH_CONFIG = "../../config.xml";
+        public static string XML_PATH_CONFIG = "../../config.xml";
 
-        public int width = 868, height = 593;       //窗口宽高
-        public int x = 700, y = 300;                //窗口出现的位置
-        public Font font = new Font("微软雅黑", 12);//字体
+        public int width = 868, height = 593;       //窗口宽高 默认在窗口正常关闭后保存
+        public int x = 700, y = 300;                //窗口出现的位置 默认在窗口正常关闭后保存
+        public Font font = new Font("微软雅黑", 12);//字体 在选择字体点击确认后保存 在点击恢复默认字体时保存
 
         private Configuration()
         {
@@ -74,6 +74,9 @@ namespace EncryptTextEditor
             XmlNodeList list = node.ChildNodes;
             foreach (XmlNode n in list)
             {
+                //如果是注释就跳过
+                if (n.NodeType != XmlNodeType.Element)
+                    continue;
                 XmlElement elem = (XmlElement)n;
                 switch (elem.Name)
                 {
@@ -86,6 +89,11 @@ namespace EncryptTextEditor
                     case "font":
                         string family = elem.SelectSingleNode("family").InnerText;
                         int size = Int32.Parse(elem.SelectSingleNode("size").InnerText);
+                        if (Boolean.Parse(elem.SelectSingleNode("regular").InnerText))
+                        {
+                            this.font = new Font(family, size, FontStyle.Regular);
+                            break;
+                        }
                         FontStyle fontStyle = FontStyle.Bold | FontStyle.Italic | FontStyle.Strikeout | FontStyle.Underline;
                         if (!Boolean.Parse(elem.SelectSingleNode("bold").InnerText))
                             fontStyle ^= FontStyle.Bold;

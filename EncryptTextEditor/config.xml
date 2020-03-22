@@ -1,17 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
   <app>
+    <!--主窗口的宽度-->
     <width>868</width>
+    <!--主窗口高度-->
     <height>593</height>
+    <!--窗口出现的x坐标-->
     <x>700</x>
+    <!--窗口出现的y坐标-->
     <y>300</y>
     <font>
       <family>微软雅黑</family>
       <size>12</size>
+      <!--如果regular为true的话，就不检查以下4个属性了-->
+      <regular>true</regular>
       <bold>false</bold>
       <italic>false</italic>
       <strikeout>false</strikeout>
-      <underline>true</underline>
+      <underline>false</underline>
     </font>
   </app>
 </config>

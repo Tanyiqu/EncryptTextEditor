@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using EncryptTextEditor.MyExceptions;
 
 namespace EncryptTextEditor
 {
@@ -261,6 +262,7 @@ namespace EncryptTextEditor
         //打开文件位置
         private void menuItemOpenInExplorer_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("打开文件位置");
             if (filePath == null)
                 return;
             //获取所在路径
@@ -273,6 +275,7 @@ namespace EncryptTextEditor
         //点击关闭（X）
         private void menuItemExit_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("点击关闭（X）");
             //调用close关闭，关闭时的保存操作在closing中实现
             this.Close();
         }
@@ -323,10 +326,10 @@ namespace EncryptTextEditor
             }
         }
 
-
         //打开文件
         private void openFile()
         {
+            Console.WriteLine("打开文件");
             //获取已打开文件的字节数组
             byte[] arr = Utils.readFile(filePath);
             //解码成字符串
@@ -358,6 +361,7 @@ namespace EncryptTextEditor
         //字体（F）
         private void menuItemFont_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("字体（F）");
             FontDialog fontDialog = new FontDialog();
             //设置字体为当前文本的字体
             fontDialog.Font = textArea.Font;
@@ -377,8 +381,28 @@ namespace EncryptTextEditor
         //恢复默认字体
         private void menuItemDefaultFont_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("恢复默认字体");
+
             Font font = new Font("微软雅黑", 12);
             textArea.Font = font;
+            //修改XML文件
+
+            try
+            {
+                Utils.writeConfigXml(new string[] { "app", "font", "family" }, "微软雅黑");
+                Utils.writeConfigXml(new string[] { "app", "font", "size" }, "12");
+                Utils.writeConfigXml(new string[] { "app", "font", "regular" }, "true");
+                Utils.writeConfigXml(new string[] { "app", "font", "bold" }, "false");
+                Utils.writeConfigXml(new string[] { "app", "font", "italic" }, "false");
+                Utils.writeConfigXml(new string[] { "app", "font", "strikeout" }, "false");
+                Utils.writeConfigXml(new string[] { "app", "font", "underline" }, "false");
+            }
+            catch (WriteConfigXmlException e1)
+            {
+                Console.WriteLine("修改字体时保存XML失败:");
+                Console.WriteLine(e1.Message);
+            }
+
         }
 
 

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml;
+using EncryptTextEditor.MyExceptions;
 
 namespace EncryptTextEditor
 {
@@ -73,9 +75,57 @@ namespace EncryptTextEditor
             return arr;
         }
 
+        //修改并保存xml文件的某个node的值
+        //修改此程序的config.xml
+        //返回是否修改成功，不成功包括 一系列异常，里面抛出异常都认为它不成功
+        //可以支持修改<config>里的三级子结点，不包括<config>结点
+        public static void writeConfigXml(string[] nodes,string value) 
+        {
+            XmlDocument xmlConfig = new XmlDocument();
+            //加载xml文件
+            try
+            {
+                xmlConfig.Load(Configuration.XML_PATH_CONFIG);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new WriteConfigXmlException("加载XML异常");
+            }
 
-        //打开文件
+            //因为config.xml的根节点是固定的，所以直接获取它
+            //获取根节点
+            XmlNode node = null;
+            try
+            {
+                node = xmlConfig.SelectSingleNode("config");
+                int n = nodes.Length;//有n级结点
+                for (int i = 0; i < n; i++)
+                {
+                    node = node.SelectSingleNode(nodes[i]);
+                }
 
+            }
+            catch (XmlException e)
+            {
+                throw new WriteConfigXmlException("选择结点异常 \n" + e.Message);
+            }
+            //此时的node为要修改的那个结点
+
+            //XmlElement elem = (XmlElement)node;
+            node.InnerText = value;
+
+            try
+            {
+                xmlConfig.Save(Configuration.XML_PATH_CONFIG);
+            }
+            catch (XmlException e)
+            {
+                Console.WriteLine(e.Message);
+                throw new WriteConfigXmlException("保存XML异常");
+            }
+
+        }
 
     }
 }
