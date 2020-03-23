@@ -87,7 +87,7 @@ namespace EncryptTextEditor
                         this.height = Int32.Parse(elem.InnerText);
                         break;
                     case "font":
-                        string family = elem.SelectSingleNode("family").InnerText;
+                        string family = elem.SelectSingleNode("name").InnerText;
                         int size = Int32.Parse(elem.SelectSingleNode("size").InnerText);
                         if (Boolean.Parse(elem.SelectSingleNode("regular").InnerText))
                         {

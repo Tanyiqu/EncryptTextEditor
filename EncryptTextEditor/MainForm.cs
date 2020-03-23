@@ -374,6 +374,28 @@ namespace EncryptTextEditor
                 Console.WriteLine("Bold : " + textArea.Font.Bold);
                 Console.WriteLine("Strikeout : " + textArea.Font.Strikeout);
                 Console.WriteLine("Underline : " + textArea.Font.Underline);
+
+                //保存配置到config.xml中
+                try
+                {
+                    Utils.writeConfigXml(new string[] { "app", "font", "name" }, textArea.Font.Name);
+                    Utils.writeConfigXml(new string[] { "app", "font", "size" }, textArea.Font.Size.ToString());
+                   
+                    Utils.writeConfigXml(new string[] { "app", "font", "bold" }, textArea.Font.Bold.ToString());
+                    Utils.writeConfigXml(new string[] { "app", "font", "italic" }, textArea.Font.Italic.ToString());
+                    Utils.writeConfigXml(new string[] { "app", "font", "strikeout" }, textArea.Font.Strikeout.ToString());
+                    Utils.writeConfigXml(new string[] { "app", "font", "underline" }, textArea.Font.Underline.ToString());
+                    //如果以上4个值都为false，regular的值就为true
+                    //只要有一个为true，regular就为false
+                    bool regular = textArea.Font.Bold || textArea.Font.Italic || textArea.Font.Strikeout || textArea.Font.Underline;
+                    regular = !regular;
+                    Utils.writeConfigXml(new string[] { "app", "font", "regular" }, regular.ToString());
+                }
+                catch (WriteConfigXmlException e1)
+                {
+                    Console.WriteLine("修改字体时保存XML失败:");
+                    Console.WriteLine(e1.Message);
+                }
             }
 
         }
@@ -382,14 +404,12 @@ namespace EncryptTextEditor
         private void menuItemDefaultFont_Click(object sender, EventArgs e)
         {
             Console.WriteLine("恢复默认字体");
-
             Font font = new Font("微软雅黑", 12);
             textArea.Font = font;
             //修改XML文件
-
             try
             {
-                Utils.writeConfigXml(new string[] { "app", "font", "family" }, "微软雅黑");
+                Utils.writeConfigXml(new string[] { "app", "font", "name" }, "微软雅黑");
                 Utils.writeConfigXml(new string[] { "app", "font", "size" }, "12");
                 Utils.writeConfigXml(new string[] { "app", "font", "regular" }, "true");
                 Utils.writeConfigXml(new string[] { "app", "font", "bold" }, "false");
@@ -402,7 +422,6 @@ namespace EncryptTextEditor
                 Console.WriteLine("修改字体时保存XML失败:");
                 Console.WriteLine(e1.Message);
             }
-
         }
 
 

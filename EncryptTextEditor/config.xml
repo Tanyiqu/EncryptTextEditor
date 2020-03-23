@@ -10,7 +10,7 @@
     <!--窗口出现的y坐标-->
     <y>300</y>
     <font>
-      <family>微软雅黑</family>
+      <name>微软雅黑</name>
       <size>12</size>
       <!--如果regular为true的话，就不检查以下4个属性了-->
       <regular>true</regular>
