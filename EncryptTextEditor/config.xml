@@ -2,22 +2,22 @@
 <config>
   <app>
     <!--主窗口的宽度-->
-    <width>868</width>
+    <width>895</width>
     <!--主窗口高度-->
-    <height>593</height>
+    <height>502</height>
     <!--窗口出现的x坐标-->
-    <x>700</x>
+    <x>96</x>
     <!--窗口出现的y坐标-->
-    <y>300</y>
+    <y>66</y>
     <font>
-      <name>微软雅黑</name>
+      <name>宋体</name>
       <size>12</size>
       <!--如果regular为true的话，就不检查以下4个属性了-->
-      <regular>true</regular>
-      <bold>false</bold>
-      <italic>false</italic>
-      <strikeout>false</strikeout>
-      <underline>false</underline>
+      <regular>True</regular>
+      <bold>False</bold>
+      <italic>False</italic>
+      <strikeout>False</strikeout>
+      <underline>False</underline>
     </font>
   </app>
 </config>

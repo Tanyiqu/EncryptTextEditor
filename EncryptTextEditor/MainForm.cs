@@ -283,6 +283,25 @@ namespace EncryptTextEditor
         //即将关闭
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //点了叉叉就得保存一下配置
+            //获取窗口的宽高
+            int height = this.Height;
+            Point p = this.Location;
+            try
+            {
+                Utils.writeConfigXml(new string[] { "app", "width" }, this.Width.ToString());
+                Utils.writeConfigXml(new string[] { "app", "height" }, this.Height.ToString());
+                Utils.writeConfigXml(new string[] { "app", "x" }, this.Location.X.ToString());
+                Utils.writeConfigXml(new string[] { "app", "y" }, this.Location.Y.ToString());
+            }
+            catch (WarningException e1)
+            {
+                Console.WriteLine("保存宽高坐标XML失败:");
+                Console.WriteLine(e1.Message);
+            }
+
+            //获取窗口的坐标
+
             //如果没有改动，直接关闭
             if (!modified)
             {

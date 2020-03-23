@@ -19,8 +19,8 @@ namespace EncryptTextEditor
         private static readonly object padlock = new object();
         public static string XML_PATH_CONFIG = "../../config.xml";
 
-        public int width = 868, height = 593;       //窗口宽高 默认在窗口正常关闭后保存
-        public int x = 700, y = 300;                //窗口出现的位置 默认在窗口正常关闭后保存
+        public int width = 868, height = 593;       //窗口宽高 默认在窗口点击关闭后保存
+        public int x = 700, y = 300;                //窗口出现的位置 默认在窗口点击关闭后保存
         public Font font = new Font("微软雅黑", 12);//字体 在选择字体点击确认后保存 在点击恢复默认字体时保存
 
         private Configuration()
@@ -85,6 +85,12 @@ namespace EncryptTextEditor
                         break;
                     case "height":
                         this.height = Int32.Parse(elem.InnerText);
+                        break;
+                    case "x":
+                        this.x = Int32.Parse(elem.InnerText);
+                        break;
+                    case "y":
+                        this.y = Int32.Parse(elem.InnerText);
                         break;
                     case "font":
                         string family = elem.SelectSingleNode("name").InnerText;
