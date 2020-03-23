@@ -6,20 +6,18 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using EncryptTextEditor.MyExceptions;
+using EncryptTextEditor.Utils;
 
-namespace EncryptTextEditor
+namespace EncryptTextEditor.Utils
 {
-    public static partial class Utils
+    public static class FileUtil
     {
-
-        public static string APP_NAME = "EncryptTextEditor";
-
         //仅保存文本到指定路径
         //返回保存是否成功
         public static bool saveFile(string text, string path)
         {
             //加密此文本
-            byte[] arr = Utils.encode(text);
+            byte[] arr = CoreUtil.encode(text);
             //尝试保存文件
             try
             {
@@ -34,6 +32,7 @@ namespace EncryptTextEditor
                 return false;
             }
         }
+
 
         //另存为
         //1.有已经打开的文件，另存为后已经打开的路径不变
@@ -65,6 +64,7 @@ namespace EncryptTextEditor
             return saveFile(text,tempPath);
         }
 
+
         //读取文件，返回读到的字节数组
         public static byte[] readFile(string path)
         {
@@ -74,6 +74,7 @@ namespace EncryptTextEditor
             fs.Close();
             return arr;
         }
+
 
         //修改并保存xml文件的某个node的值
         //修改此程序的config.xml
@@ -90,7 +91,7 @@ namespace EncryptTextEditor
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                throw new WriteConfigXmlException("加载XML异常");
+                throw new WriteXmlException("加载XML异常");
             }
 
             //因为config.xml的根节点是固定的，所以直接获取它
@@ -108,7 +109,7 @@ namespace EncryptTextEditor
             }
             catch (XmlException e)
             {
-                throw new WriteConfigXmlException("选择结点异常 \n" + e.Message);
+                throw new WriteXmlException("选择结点异常 \n" + e.Message);
             }
             //此时的node为要修改的那个结点
 
@@ -122,7 +123,7 @@ namespace EncryptTextEditor
             catch (XmlException e)
             {
                 Console.WriteLine(e.Message);
-                throw new WriteConfigXmlException("保存XML异常");
+                throw new WriteXmlException("保存XML异常");
             }
 
         }

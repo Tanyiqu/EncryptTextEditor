@@ -7,12 +7,12 @@ using System.Text;
 核心加密解密算法
 *****************************************/
 
-namespace EncryptTextEditor
+namespace EncryptTextEditor.Utils
 {
-    public static partial class Utils
+    public static class CoreUtil
     {
         //字符串加密成字节数组
-        static byte[] encode(string text)
+        public static byte[] encode(string text)
         {
             byte[] arr = System.Text.Encoding.Default.GetBytes(text);
             byte[] arr2 = new byte[arr.Length];

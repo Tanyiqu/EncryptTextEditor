@@ -5,23 +5,23 @@ using System.Text;
 
 namespace EncryptTextEditor.MyExceptions
 {
-    class WriteConfigXmlException : ApplicationException
+    class WriteXmlException : ApplicationException
     {
         private string error;
         private Exception innerException;
 
-        public WriteConfigXmlException()
+        public WriteXmlException()
         {
 
         }
 
-        public WriteConfigXmlException(string msg)
+        public WriteXmlException(string msg)
             : base(msg)
         {
             this.error = msg;
         }
 
-        public WriteConfigXmlException(string msg, Exception innerException)
+        public WriteXmlException(string msg, Exception innerException)
             : base(msg)
         {
             this.innerException = innerException;

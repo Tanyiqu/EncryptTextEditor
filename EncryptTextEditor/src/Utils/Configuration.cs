@@ -7,7 +7,7 @@ using System.Xml;
 using System.IO;
 using System.Diagnostics;
 
-namespace EncryptTextEditor
+namespace EncryptTextEditor.Utils
 {
     /// <summary>
     /// 配置类，定义所有配置属性
@@ -17,7 +17,7 @@ namespace EncryptTextEditor
     {
         private static Configuration instance = null;
         private static readonly object padlock = new object();
-        public static string XML_PATH_CONFIG = "../../config.xml";
+        public static string XML_PATH_CONFIG = "../../data/config.xml";
 
         public int width = 868, height = 593;       //窗口宽高 默认在窗口点击关闭后保存
         public int x = 700, y = 300;                //窗口出现的位置 默认在窗口点击关闭后保存

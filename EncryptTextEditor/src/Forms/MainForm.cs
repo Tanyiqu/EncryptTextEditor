@@ -7,7 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 using EncryptTextEditor.MyExceptions;
+using EncryptTextEditor.Utils;
+
 
 namespace EncryptTextEditor
 {
@@ -26,6 +29,21 @@ namespace EncryptTextEditor
         {
             InitializeComponent();
             this.args = args;
+        }
+
+        private void loadConf()
+        {
+            Console.WriteLine("加载配置");
+
+            //窗口大小
+            this.Size = new Size(config.width, config.height);
+            //窗口位置
+            this.Location = new Point(config.x, config.y);
+
+            //字体
+            this.textArea.Font = config.font;
+
+
         }
 
         //加载窗口，并判断是否有携带参数
@@ -80,7 +98,7 @@ namespace EncryptTextEditor
             //字符数过多的提醒
             if (wordCount > warning)
             {
-                MessageBox.Show("字符数已超过" + warning + "！\n文字过多可能影响保存效率！", Utils.APP_NAME + "：警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("字符数已超过" + warning + "！\n文字过多可能影响保存效率！", Program.APP_NAME + "：警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 warning *= 2;
                 statusLabelCount.Text = wordCount + "/" + warning + "字符";
             }
@@ -96,7 +114,7 @@ namespace EncryptTextEditor
             if (modified)//有改动
             {
                 //保存或另存为后，再新建
-                DialogResult result = MessageBox.Show("你想保存更改吗？", Utils.APP_NAME, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("你想保存更改吗？", Program.APP_NAME, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
                 //是：保存或另存为后新建
                 if (result == DialogResult.Yes)
@@ -129,7 +147,7 @@ namespace EncryptTextEditor
             wordCount = 0;
 
             this.textArea.Clear();
-            this.Text = "无标题 - " + Utils.APP_NAME;
+            this.Text = "无标题 - " + Program.APP_NAME;
             this.statusLabelStatus.Text = "就绪";
             this.statusLabelCount.Text = "0/512字符";
 
@@ -147,7 +165,7 @@ namespace EncryptTextEditor
             if(modified)
             {
                 //保存或另存为后，再新建
-                DialogResult result = MessageBox.Show("你想保存更改吗？", Utils.APP_NAME, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("你想保存更改吗？", Program.APP_NAME, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
                 //是：保存或另存为后打开文件
                 if (result == DialogResult.Yes)
@@ -205,10 +223,10 @@ namespace EncryptTextEditor
             if (openingFile)
             {
                 Console.WriteLine("保存");
-                saveFlag = Utils.saveFile(textArea.Text, filePath);
+                saveFlag = FileUtil.saveFile(textArea.Text, filePath);
                 if (!saveFlag)//保存失败
                 {
-                    MessageBox.Show("文件保存错误！请尽快备份内容！\n", Utils.APP_NAME + "：错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("文件保存错误！请尽快备份内容！\n", Program.APP_NAME + "：错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
 
                 }
@@ -218,16 +236,16 @@ namespace EncryptTextEditor
             {
                 Console.WriteLine("另存为");
                 //当前肯定没有打开文件，所以为false
-                saveFlag = Utils.saveAsFile(textArea.Text, false, ref filePath);
+                saveFlag = FileUtil.saveAsFile(textArea.Text, false, ref filePath);
 
                 if (!saveFlag)//保存失败
                 {
-                    MessageBox.Show("未保存成功！请尽快备份内容！\n", Utils.APP_NAME + "：警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("未保存成功！请尽快备份内容！\n", Program.APP_NAME + "：警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 //保存成功
                 openingFile = true;
-                this.Text = Path.GetFileName(filePath) + " - " + Utils.APP_NAME;
+                this.Text = Path.GetFileName(filePath) + " - " + Program.APP_NAME;
             }
 
             //执行到这里肯定保存成功了
@@ -245,16 +263,16 @@ namespace EncryptTextEditor
         private void menuItemSaveAs_Click(object sender, EventArgs e)
         {
             Console.WriteLine("Ctrl + Shift + S");
-            saveFlag = Utils.saveAsFile(textArea.Text, openingFile, ref filePath);
+            saveFlag = FileUtil.saveAsFile(textArea.Text, openingFile, ref filePath);
             if (!saveFlag)//保存失败
             {
-                MessageBox.Show("未保存成功！请尽快备份内容！\n", Utils.APP_NAME + "：警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("未保存成功！请尽快备份内容！\n", Program.APP_NAME + "：警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             //保存完成，此时一定有已经打开的文件
             openingFile = true;
             //修改标题名
-            this.Text = Path.GetFileName(filePath) + " - " + Utils.APP_NAME;
+            this.Text = Path.GetFileName(filePath) + " - " + Program.APP_NAME;
             modified = false;
             statusLabelStatus.Text = "已保存";
         }
@@ -264,12 +282,16 @@ namespace EncryptTextEditor
         {
             Console.WriteLine("打开文件位置");
             if (filePath == null)
+            {
+                Process.Start(Application.StartupPath);
                 return;
+            }
+                
             //获取所在路径
             string parentPath = Path.GetDirectoryName(filePath);
             Console.WriteLine(parentPath);
             //打开此路径
-            System.Diagnostics.Process.Start(parentPath);
+            Process.Start(parentPath);
         }
 
         //点击关闭（X）
@@ -284,15 +306,12 @@ namespace EncryptTextEditor
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             //点了叉叉就得保存一下配置
-            //获取窗口的宽高
-            int height = this.Height;
-            Point p = this.Location;
             try
             {
-                Utils.writeConfigXml(new string[] { "app", "width" }, this.Width.ToString());
-                Utils.writeConfigXml(new string[] { "app", "height" }, this.Height.ToString());
-                Utils.writeConfigXml(new string[] { "app", "x" }, this.Location.X.ToString());
-                Utils.writeConfigXml(new string[] { "app", "y" }, this.Location.Y.ToString());
+                FileUtil.writeConfigXml(new string[] { "app", "width" }, this.Width.ToString());
+                FileUtil.writeConfigXml(new string[] { "app", "height" }, this.Height.ToString());
+                FileUtil.writeConfigXml(new string[] { "app", "x" }, this.Location.X.ToString());
+                FileUtil.writeConfigXml(new string[] { "app", "y" }, this.Location.Y.ToString());
             }
             catch (WarningException e1)
             {
@@ -311,7 +330,7 @@ namespace EncryptTextEditor
             //有改动，分3种情况
             Console.WriteLine("有改动");
 
-            DialogResult result = MessageBox.Show("你想保存更改吗？", Utils.APP_NAME, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("你想保存更改吗？", Program.APP_NAME, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
             //是：保存或另存为后关闭
             if (result == DialogResult.Yes)
@@ -350,9 +369,9 @@ namespace EncryptTextEditor
         {
             Console.WriteLine("打开文件");
             //获取已打开文件的字节数组
-            byte[] arr = Utils.readFile(filePath);
+            byte[] arr = FileUtil.readFile(filePath);
             //解码成字符串
-            string text = Utils.decode(arr);
+            string text = CoreUtil.decode(arr);
 
             //在显示文本之前，调整warning限制字符数
             while(warning < text.Length)
@@ -374,7 +393,7 @@ namespace EncryptTextEditor
             modified = false;
             statusLabelStatus.Text = "已保存";
             //改变标题
-            this.Text = Path.GetFileName(filePath) + " - " + Utils.APP_NAME;
+            this.Text = Path.GetFileName(filePath) + " - " + Program.APP_NAME;
         }
 
         //字体（F）
@@ -397,20 +416,20 @@ namespace EncryptTextEditor
                 //保存配置到config.xml中
                 try
                 {
-                    Utils.writeConfigXml(new string[] { "app", "font", "name" }, textArea.Font.Name);
-                    Utils.writeConfigXml(new string[] { "app", "font", "size" }, textArea.Font.Size.ToString());
-                   
-                    Utils.writeConfigXml(new string[] { "app", "font", "bold" }, textArea.Font.Bold.ToString());
-                    Utils.writeConfigXml(new string[] { "app", "font", "italic" }, textArea.Font.Italic.ToString());
-                    Utils.writeConfigXml(new string[] { "app", "font", "strikeout" }, textArea.Font.Strikeout.ToString());
-                    Utils.writeConfigXml(new string[] { "app", "font", "underline" }, textArea.Font.Underline.ToString());
+                    FileUtil.writeConfigXml(new string[] { "app", "font", "name" }, textArea.Font.Name);
+                    FileUtil.writeConfigXml(new string[] { "app", "font", "size" }, textArea.Font.Size.ToString());
+
+                    FileUtil.writeConfigXml(new string[] { "app", "font", "bold" }, textArea.Font.Bold.ToString());
+                    FileUtil.writeConfigXml(new string[] { "app", "font", "italic" }, textArea.Font.Italic.ToString());
+                    FileUtil.writeConfigXml(new string[] { "app", "font", "strikeout" }, textArea.Font.Strikeout.ToString());
+                    FileUtil.writeConfigXml(new string[] { "app", "font", "underline" }, textArea.Font.Underline.ToString());
                     //如果以上4个值都为false，regular的值就为true
                     //只要有一个为true，regular就为false
                     bool regular = textArea.Font.Bold || textArea.Font.Italic || textArea.Font.Strikeout || textArea.Font.Underline;
                     regular = !regular;
-                    Utils.writeConfigXml(new string[] { "app", "font", "regular" }, regular.ToString());
+                    FileUtil.writeConfigXml(new string[] { "app", "font", "regular" }, regular.ToString());
                 }
-                catch (WriteConfigXmlException e1)
+                catch (WriteXmlException e1)
                 {
                     Console.WriteLine("修改字体时保存XML失败:");
                     Console.WriteLine(e1.Message);
@@ -428,15 +447,15 @@ namespace EncryptTextEditor
             //修改XML文件
             try
             {
-                Utils.writeConfigXml(new string[] { "app", "font", "name" }, "微软雅黑");
-                Utils.writeConfigXml(new string[] { "app", "font", "size" }, "12");
-                Utils.writeConfigXml(new string[] { "app", "font", "regular" }, "true");
-                Utils.writeConfigXml(new string[] { "app", "font", "bold" }, "false");
-                Utils.writeConfigXml(new string[] { "app", "font", "italic" }, "false");
-                Utils.writeConfigXml(new string[] { "app", "font", "strikeout" }, "false");
-                Utils.writeConfigXml(new string[] { "app", "font", "underline" }, "false");
+                FileUtil.writeConfigXml(new string[] { "app", "font", "name" }, "微软雅黑");
+                FileUtil.writeConfigXml(new string[] { "app", "font", "size" }, "12");
+                FileUtil.writeConfigXml(new string[] { "app", "font", "regular" }, "true");
+                FileUtil.writeConfigXml(new string[] { "app", "font", "bold" }, "false");
+                FileUtil.writeConfigXml(new string[] { "app", "font", "italic" }, "false");
+                FileUtil.writeConfigXml(new string[] { "app", "font", "strikeout" }, "false");
+                FileUtil.writeConfigXml(new string[] { "app", "font", "underline" }, "false");
             }
-            catch (WriteConfigXmlException e1)
+            catch (WriteXmlException e1)
             {
                 Console.WriteLine("修改字体时保存XML失败:");
                 Console.WriteLine(e1.Message);
