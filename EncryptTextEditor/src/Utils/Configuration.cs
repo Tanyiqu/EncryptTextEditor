@@ -15,6 +15,16 @@ namespace EncryptTextEditor.Utils
     /// </summary>
     public sealed class Configuration
     {
+        public class Extension 
+        {
+            public string name;
+            public string desc;
+            public Extension(string name, string desc)
+            {
+                this.name = name;   //扩展名
+                this.desc = desc;   //描述
+            }
+        }
         private static Configuration instance = null;
         private static readonly object padlock = new object();
         public static string XML_PATH_CONFIG = Program.START_PATH + "/../../data/config.xml";
@@ -24,6 +34,9 @@ namespace EncryptTextEditor.Utils
         public int width = 868, height = 593;       //窗口宽高 默认在窗口点击关闭后保存
         public int x = 700, y = 300;                //窗口出现的位置 默认在窗口点击关闭后保存
         public Font font = new Font("微软雅黑", 12);//字体 在选择字体点击确认后保存 在点击恢复默认字体时保存
+
+
+        List<Extension> extensions = new List<Extension>(); //应用程序关联的扩展名
 
         private Configuration()
         {
@@ -60,13 +73,15 @@ namespace EncryptTextEditor.Utils
             {
                 switch (n.Name)
                 {
-                    case "setting":
-                        loadXML_setting(n);
-                        break;
                     case "app":
                         loadXML_app(n);
                         break;
-                        
+                    case "setting":
+                        loadXML_setting(n);
+                        break;
+                    case "extensions":
+                        loadXML_extensions(n);
+                        break;  
                 }
             }
         }
@@ -141,10 +156,32 @@ namespace EncryptTextEditor.Utils
             Console.WriteLine("加载setting耗时:" + sw.Elapsed);
         }
 
+        //读取xml中的<extensions>结点
+        private void loadXML_extensions(XmlNode node)
+        {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            XmlNodeList list = node.ChildNodes;
+            foreach (XmlNode n in list)
+            {
+                if (n.Name.Equals("extension"))
+                {
+                    Extension ext = new Extension(n.SelectSingleNode("name").InnerText, n.SelectSingleNode("desc").InnerText);
+                    extensions.Add(ext);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            sw.Stop();
+            Console.WriteLine("加载extensions耗时:" + sw.Elapsed);
+        }
+
         private void printLog()
         {
             string str = "";
-            str = "首次启动 : " + firstStart + '\n';
+            str = "首次启动 : " + firstStart;
             Console.WriteLine("\n加载的app：\n" + str);
 
             str = "width : " + width + '\n';
@@ -153,6 +190,30 @@ namespace EncryptTextEditor.Utils
             str += ("y : " + y + '\n');
             str += ("font : " + font.ToString() + '\n');
             Console.WriteLine("\n加载的setting：\n" + str);
+
+            str = "";
+            foreach (Extension ext in extensions)
+            {
+                str += (ext.desc + '：' + ext.name + '\n');
+            }
+            Console.WriteLine("\n加载的extensions：\n" + str);
+
+        }
+
+        //
+        public string getDialogFilter()
+        {
+            string str = "";
+            char separate = '|';
+            foreach (Extension ext in extensions)
+            {
+                str += ext.desc;
+                str += separate;
+                str += ext.name;
+                str += separate;
+            }
+            return str.TrimEnd(separate); ;
+
         }
 
         //获取实例

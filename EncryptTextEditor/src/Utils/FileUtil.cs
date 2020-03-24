@@ -42,10 +42,10 @@ namespace EncryptTextEditor.Utils
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Title = "另存为";
-            sfd.Filter = "加密文本文件|*.ept|账户文件|*.act";
+            //sfd.Filter = "加密文本文件|*.ept|账户文件|*.act";
+            sfd.Filter = Configuration.Instance.getDialogFilter();
             sfd.ShowDialog();
             string tempPath = sfd.FileName;
-
             //没有已经打开的文件
             if(!openingFile)
             {

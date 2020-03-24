@@ -196,7 +196,8 @@ namespace EncryptTextEditor
             //没有改动，就直接选择文件打开
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "打开";
-            ofd.Filter = "加密文本文件|*.ept|账户文件|*.act";
+            //ofd.Filter = "加密文本文件|*.ept|账户文件|*.act";
+            ofd.Filter = config.getDialogFilter();
             ofd.ShowDialog();
 
             string tmpPath = ofd.FileName;

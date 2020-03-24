@@ -27,4 +27,15 @@
       <underline>False</underline>
     </font>
   </setting>
+  <!--适配扩展名-->
+  <extensions>
+    <extension>
+      <name>*.ept</name>
+      <desc>加密文本文件</desc>
+    </extension>
+    <extension>
+      <name>*.act</name>
+      <desc>账户文件</desc>
+    </extension>
+  </extensions>
 </config>
