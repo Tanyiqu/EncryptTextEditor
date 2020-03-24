@@ -17,7 +17,9 @@ namespace EncryptTextEditor.Utils
     {
         private static Configuration instance = null;
         private static readonly object padlock = new object();
-        public static string XML_PATH_CONFIG = "../../data/config.xml";
+        public static string XML_PATH_CONFIG = Program.START_PATH + "/../../data/config.xml";
+
+        bool firstStart = true;     //程序首次启动 在首次启动的正常关闭后，保存为false
 
         public int width = 868, height = 593;       //窗口宽高 默认在窗口点击关闭后保存
         public int x = 700, y = 300;                //窗口出现的位置 默认在窗口点击关闭后保存
@@ -58,9 +60,13 @@ namespace EncryptTextEditor.Utils
             {
                 switch (n.Name)
                 {
+                    case "setting":
+                        loadXML_setting(n);
+                        break;
                     case "app":
                         loadXML_app(n);
                         break;
+                        
                 }
             }
         }
@@ -70,7 +76,25 @@ namespace EncryptTextEditor.Utils
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
+            XmlNodeList list = node.ChildNodes;
+            foreach (XmlNode n in list)
+            {
+                switch (n.Name)
+                {
+                    case "firstStart":
+                        this.firstStart = Boolean.Parse(n.InnerText);
+                        break;
+                }
+            }
+            sw.Stop();
+            Console.WriteLine("\n加载app耗时:" + sw.Elapsed);
+        }
 
+        //读取xml中的<setting>结点
+        private void loadXML_setting(XmlNode node)
+        {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             XmlNodeList list = node.ChildNodes;
             foreach (XmlNode n in list)
             {
@@ -113,36 +137,22 @@ namespace EncryptTextEditor.Utils
                         break;
                 }
             }
-
-            //this.width = Int32.Parse(node.SelectSingleNode("width").InnerText);
-
-            //this.height = Int32.Parse(node.SelectSingleNode("height").InnerText);
-
-            //XmlNode fontNode = node.SelectSingleNode("font");
-            //string family = fontNode.SelectSingleNode("family").InnerText;
-            //int size = Int32.Parse(fontNode.SelectSingleNode("size").InnerText);
-
-            //FontStyle fontStyle = FontStyle.Bold | FontStyle.Italic | FontStyle.Strikeout | FontStyle.Underline;
-            //if (!Boolean.Parse(fontNode.SelectSingleNode("bold").InnerText))
-            //    fontStyle ^= FontStyle.Bold;
-            //if (!Boolean.Parse(fontNode.SelectSingleNode("italic").InnerText))
-            //    fontStyle ^= FontStyle.Italic;
-            //if (!Boolean.Parse(fontNode.SelectSingleNode("strikeout").InnerText))
-            //    fontStyle ^= FontStyle.Strikeout;
-            //if (!Boolean.Parse(fontNode.SelectSingleNode("underline").InnerText))
-            //    fontStyle ^= FontStyle.Underline;
-
-            //this.font = new Font(family, size, fontStyle);
-
             sw.Stop();
-            Console.WriteLine(sw.Elapsed);
+            Console.WriteLine("加载setting耗时:" + sw.Elapsed);
         }
 
         private void printLog()
         {
-            string str = "width : " + width + '\n';
+            string str = "";
+            str = "首次启动 : " + firstStart + '\n';
+            Console.WriteLine("\n加载的app：\n" + str);
+
+            str = "width : " + width + '\n';
             str += ("height : " + height + '\n');
-            Console.WriteLine(str);
+            str += ("x : " + x + '\n');
+            str += ("y : " + y + '\n');
+            str += ("font : " + font.ToString() + '\n');
+            Console.WriteLine("\n加载的setting：\n" + str);
         }
 
         //获取实例

@@ -1,0 +1,8 @@
+E:\Code\C#\Project\EncryptTextEditor\EncryptTextEditor\bin\Release\EncryptTextEditor.exe
+E:\Code\C#\Project\EncryptTextEditor\EncryptTextEditor\bin\Release\EncryptTextEditor.pdb
+E:\Code\C#\Project\EncryptTextEditor\EncryptTextEditor\obj\Release\EncryptTextEditor.csprojResolveAssemblyReference.cache
+E:\Code\C#\Project\EncryptTextEditor\EncryptTextEditor\obj\Release\EncryptTextEditor.MainForm.resources
+E:\Code\C#\Project\EncryptTextEditor\EncryptTextEditor\obj\Release\EncryptTextEditor.Properties.Resources.resources
+E:\Code\C#\Project\EncryptTextEditor\EncryptTextEditor\obj\Release\EncryptTextEditor.csproj.GenerateResource.Cache
+E:\Code\C#\Project\EncryptTextEditor\EncryptTextEditor\obj\Release\EncryptTextEditor.exe
+E:\Code\C#\Project\EncryptTextEditor\EncryptTextEditor\obj\Release\EncryptTextEditor.pdb

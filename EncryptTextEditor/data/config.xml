@@ -1,14 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
+  <!--程序运行相关-->
   <app>
+    <!--记录程序是否首次启动-->
+    <firstStart>false</firstStart>
+  </app>
+  <!--程序主题样式-->
+  <setting>
     <!--主窗口的宽度-->
     <width>900</width>
     <!--主窗口高度-->
     <height>549</height>
     <!--窗口出现的x坐标-->
-    <x>821</x>
+    <x>352</x>
     <!--窗口出现的y坐标-->
-    <y>365</y>
+    <y>258</y>
+    <!--文本区域的字体-->
     <font>
       <name>宋体</name>
       <size>12</size>
@@ -19,5 +26,5 @@
       <strikeout>False</strikeout>
       <underline>False</underline>
     </font>
-  </app>
+  </setting>
 </config>
