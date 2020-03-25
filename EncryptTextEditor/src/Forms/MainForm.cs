@@ -12,7 +12,7 @@ using EncryptTextEditor.MyExceptions;
 using EncryptTextEditor.Utils;
 
 
-namespace EncryptTextEditor
+namespace EncryptTextEditor.Forms
 {
     public partial class MainForm : Form
     {
@@ -25,6 +25,8 @@ namespace EncryptTextEditor
         bool saveFlag = false;  //保存情况
         Configuration config = Configuration.Instance;//配置
 
+        SettingForm settingForm = null;
+
         public MainForm(string[] args)
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace EncryptTextEditor
 
         private void loadConf()
         {
-            Console.WriteLine("应用加载的配置");
+            Console.WriteLine("应用加载的配置\n");
 
             //窗口大小
             this.Size = new Size(config.width, config.height);
@@ -464,6 +466,37 @@ namespace EncryptTextEditor
                 Console.WriteLine("修改字体时保存XML失败:");
                 Console.WriteLine(e1.Message);
             }
+        }
+
+        //首选项
+        private void menuItemSetting_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("首选项");
+            if (settingForm == null)
+            {
+                settingForm = new SettingForm();
+                settingForm.Show();
+            }
+            else
+            {
+                //如果窗口被关闭的话，就显示它
+                if (settingForm.IsDisposed)
+                {
+                    settingForm = new SettingForm();
+                    settingForm.Show();
+                }
+                //否则，让他重新显示在最上层
+                else
+                {
+                    settingForm.Activate();
+                }
+            }
+        }
+
+        //关于
+        private void menuItemAbout_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("关于");
         }
 
 

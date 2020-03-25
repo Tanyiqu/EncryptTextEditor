@@ -198,6 +198,8 @@ namespace EncryptTextEditor.Utils
             
             
             str = ("font : " + font.ToString() + '\n');
+            str += ("字体颜色 : " + foreColor.ToString() + '\n');
+            str += ("背景颜色 : " + backColor.ToString() + '\n');
             Console.WriteLine("\n加载的style：\n" + str);
 
             str = "";

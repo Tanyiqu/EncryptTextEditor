@@ -1,4 +1,4 @@
-﻿namespace EncryptTextEditor
+﻿namespace EncryptTextEditor.Forms
 {
     partial class MainForm
     {
@@ -159,6 +159,7 @@
             this.menuItemSetting.Name = "menuItemSetting";
             this.menuItemSetting.Size = new System.Drawing.Size(152, 22);
             this.menuItemSetting.Text = "首选项...";
+            this.menuItemSetting.Click += new System.EventHandler(this.menuItemSetting_Click);
             // 
             // toolStripSeparator4
             // 
@@ -179,20 +180,20 @@
             // menuItemFont
             // 
             this.menuItemFont.Name = "menuItemFont";
-            this.menuItemFont.Size = new System.Drawing.Size(152, 22);
+            this.menuItemFont.Size = new System.Drawing.Size(124, 22);
             this.menuItemFont.Text = "字体(F)";
             this.menuItemFont.Click += new System.EventHandler(this.menuItemFont_Click);
             // 
             // menuItemTheme
             // 
             this.menuItemTheme.Name = "menuItemTheme";
-            this.menuItemTheme.Size = new System.Drawing.Size(152, 22);
+            this.menuItemTheme.Size = new System.Drawing.Size(124, 22);
             this.menuItemTheme.Text = "主题(T)";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(121, 6);
             // 
             // menuItemDefault
             // 
@@ -200,20 +201,20 @@
             this.menuItemDefaultFont,
             this.menuItemDefaultTheme});
             this.menuItemDefault.Name = "menuItemDefault";
-            this.menuItemDefault.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDefault.Size = new System.Drawing.Size(124, 22);
             this.menuItemDefault.Text = "恢复默认";
             // 
             // menuItemDefaultFont
             // 
             this.menuItemDefaultFont.Name = "menuItemDefaultFont";
-            this.menuItemDefaultFont.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDefaultFont.Size = new System.Drawing.Size(124, 22);
             this.menuItemDefaultFont.Text = "默认字体";
             this.menuItemDefaultFont.Click += new System.EventHandler(this.menuItemDefaultFont_Click);
             // 
             // menuItemDefaultTheme
             // 
             this.menuItemDefaultTheme.Name = "menuItemDefaultTheme";
-            this.menuItemDefaultTheme.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDefaultTheme.Size = new System.Drawing.Size(124, 22);
             this.menuItemDefaultTheme.Text = "默认主题";
             // 
             // menuHelp
@@ -229,6 +230,7 @@
             this.menuItemAbout.Name = "menuItemAbout";
             this.menuItemAbout.Size = new System.Drawing.Size(152, 22);
             this.menuItemAbout.Text = "关于(A)";
+            this.menuItemAbout.Click += new System.EventHandler(this.menuItemAbout_Click);
             // 
             // statusStrip
             // 
