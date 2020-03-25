@@ -15,6 +15,7 @@ namespace EncryptTextEditor.Utils
     /// </summary>
     public sealed class Configuration
     {
+        //内部类，表示扩展名
         public class Extension 
         {
             public string name;
@@ -25,16 +26,16 @@ namespace EncryptTextEditor.Utils
                 this.desc = desc;   //描述
             }
         }
+
         private static Configuration instance = null;
         private static readonly object padlock = new object();
         public static string XML_PATH_CONFIG = Program.START_PATH + "/../../data/config.xml";
 
         bool firstStart = true;     //程序首次启动 在首次启动的正常关闭后，保存为false
-
         public int width = 868, height = 593;       //窗口宽高 默认在窗口点击关闭后保存
         public int x = 700, y = 300;                //窗口出现的位置 默认在窗口点击关闭后保存
         public Font font = new Font("微软雅黑", 12);//字体 在选择字体点击确认后保存 在点击恢复默认字体时保存
-
+        public Color foreColor,backColor;
 
         List<Extension> extensions = new List<Extension>(); //应用程序关联的扩展名
 
@@ -76,8 +77,8 @@ namespace EncryptTextEditor.Utils
                     case "app":
                         loadXML_app(n);
                         break;
-                    case "setting":
-                        loadXML_setting(n);
+                    case "style":
+                        loadXML_style(n);
                         break;
                     case "extensions":
                         loadXML_extensions(n);
@@ -99,6 +100,18 @@ namespace EncryptTextEditor.Utils
                     case "firstStart":
                         this.firstStart = Boolean.Parse(n.InnerText);
                         break;
+                    case "width":
+                        this.width = Int32.Parse(n.InnerText);
+                        break;
+                    case "height":
+                        this.height = Int32.Parse(n.InnerText);
+                        break;
+                    case "x":
+                        this.x = Int32.Parse(n.InnerText);
+                        break;
+                    case "y":
+                        this.y = Int32.Parse(n.InnerText);
+                        break;
                 }
             }
             sw.Stop();
@@ -106,7 +119,7 @@ namespace EncryptTextEditor.Utils
         }
 
         //读取xml中的<setting>结点
-        private void loadXML_setting(XmlNode node)
+        private void loadXML_style(XmlNode node)
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
@@ -116,39 +129,33 @@ namespace EncryptTextEditor.Utils
                 //如果是注释就跳过
                 if (n.NodeType != XmlNodeType.Element)
                     continue;
-                XmlElement elem = (XmlElement)n;
-                switch (elem.Name)
+                //XmlElement elem = (XmlElement)n;
+                switch (n.Name)
                 {
-                    case "width":
-                        this.width = Int32.Parse(elem.InnerText);
-                        break;
-                    case "height":
-                        this.height = Int32.Parse(elem.InnerText);
-                        break;
-                    case "x":
-                        this.x = Int32.Parse(elem.InnerText);
-                        break;
-                    case "y":
-                        this.y = Int32.Parse(elem.InnerText);
-                        break;
                     case "font":
-                        string family = elem.SelectSingleNode("name").InnerText;
-                        int size = Int32.Parse(elem.SelectSingleNode("size").InnerText);
-                        if (Boolean.Parse(elem.SelectSingleNode("regular").InnerText))
+                        string family = n.SelectSingleNode("name").InnerText;
+                        int size = Int32.Parse(n.SelectSingleNode("size").InnerText);
+                        if (Boolean.Parse(n.SelectSingleNode("regular").InnerText))
                         {
                             this.font = new Font(family, size, FontStyle.Regular);
                             break;
                         }
                         FontStyle fontStyle = FontStyle.Bold | FontStyle.Italic | FontStyle.Strikeout | FontStyle.Underline;
-                        if (!Boolean.Parse(elem.SelectSingleNode("bold").InnerText))
+                        if (!Boolean.Parse(n.SelectSingleNode("bold").InnerText))
                             fontStyle ^= FontStyle.Bold;
-                        if (!Boolean.Parse(elem.SelectSingleNode("italic").InnerText))
+                        if (!Boolean.Parse(n.SelectSingleNode("italic").InnerText))
                             fontStyle ^= FontStyle.Italic;
-                        if (!Boolean.Parse(elem.SelectSingleNode("strikeout").InnerText))
+                        if (!Boolean.Parse(n.SelectSingleNode("strikeout").InnerText))
                             fontStyle ^= FontStyle.Strikeout;
-                        if (!Boolean.Parse(elem.SelectSingleNode("underline").InnerText))
+                        if (!Boolean.Parse(n.SelectSingleNode("underline").InnerText))
                             fontStyle ^= FontStyle.Underline;
                         this.font = new Font(family, size, fontStyle);
+                        break;
+                    case "foreColor":
+                        this.foreColor = ColorTranslator.FromHtml(n.InnerText);
+                        break;
+                    case "backColor":
+                        this.backColor = ColorTranslator.FromHtml(n.InnerText);
                         break;
                 }
             }
@@ -181,15 +188,17 @@ namespace EncryptTextEditor.Utils
         private void printLog()
         {
             string str = "";
-            str = "首次启动 : " + firstStart;
-            Console.WriteLine("\n加载的app：\n" + str);
-
-            str = "width : " + width + '\n';
+            str = "首次启动 : " + firstStart + '\n';
+            str += ("width : " + width + '\n');
             str += ("height : " + height + '\n');
             str += ("x : " + x + '\n');
             str += ("y : " + y + '\n');
-            str += ("font : " + font.ToString() + '\n');
-            Console.WriteLine("\n加载的setting：\n" + str);
+            Console.WriteLine("\n加载的app：\n" + str);
+
+            
+            
+            str = ("font : " + font.ToString() + '\n');
+            Console.WriteLine("\n加载的style：\n" + str);
 
             str = "";
             foreach (Extension ext in extensions)

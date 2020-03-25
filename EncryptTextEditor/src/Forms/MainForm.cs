@@ -39,10 +39,12 @@ namespace EncryptTextEditor
             this.Size = new Size(config.width, config.height);
             //窗口位置
             this.Location = new Point(config.x, config.y);
-
             //字体
             this.textArea.Font = config.font;
-
+            //字体颜色
+            this.textArea.ForeColor = config.foreColor;
+            //背景颜色
+            this.textArea.BackColor = config.backColor;
 
         }
 
@@ -309,10 +311,10 @@ namespace EncryptTextEditor
             //点了叉叉就得保存一下配置
             try
             {
-                FileUtil.writeConfigXml(new string[] { "setting", "width" }, this.Width.ToString());
-                FileUtil.writeConfigXml(new string[] { "setting", "height" }, this.Height.ToString());
-                FileUtil.writeConfigXml(new string[] { "setting", "x" }, this.Location.X.ToString());
-                FileUtil.writeConfigXml(new string[] { "setting", "y" }, this.Location.Y.ToString());
+                FileUtil.writeConfigXml(new string[] { "app", "width" }, this.Width.ToString());
+                FileUtil.writeConfigXml(new string[] { "app", "height" }, this.Height.ToString());
+                FileUtil.writeConfigXml(new string[] { "app", "x" }, this.Location.X.ToString());
+                FileUtil.writeConfigXml(new string[] { "app", "y" }, this.Location.Y.ToString());
                 FileUtil.writeConfigXml(new string[] { "app", "firstStart" }, "false");
             }
             catch (WarningException e1)
@@ -418,17 +420,17 @@ namespace EncryptTextEditor
                 //保存配置到config.xml中
                 try
                 {
-                    FileUtil.writeConfigXml(new string[] { "setting", "font", "name" }, textArea.Font.Name);
-                    FileUtil.writeConfigXml(new string[] { "setting", "font", "size" }, textArea.Font.Size.ToString());
-                    FileUtil.writeConfigXml(new string[] { "setting", "font", "bold" }, textArea.Font.Bold.ToString());
-                    FileUtil.writeConfigXml(new string[] { "setting", "font", "italic" }, textArea.Font.Italic.ToString());
-                    FileUtil.writeConfigXml(new string[] { "setting", "font", "strikeout" }, textArea.Font.Strikeout.ToString());
-                    FileUtil.writeConfigXml(new string[] { "setting", "font", "underline" }, textArea.Font.Underline.ToString());
+                    FileUtil.writeConfigXml(new string[] { "style", "font", "name" }, textArea.Font.Name);
+                    FileUtil.writeConfigXml(new string[] { "style", "font", "size" }, textArea.Font.Size.ToString());
+                    FileUtil.writeConfigXml(new string[] { "style", "font", "bold" }, textArea.Font.Bold.ToString());
+                    FileUtil.writeConfigXml(new string[] { "style", "font", "italic" }, textArea.Font.Italic.ToString());
+                    FileUtil.writeConfigXml(new string[] { "style", "font", "strikeout" }, textArea.Font.Strikeout.ToString());
+                    FileUtil.writeConfigXml(new string[] { "style", "font", "underline" }, textArea.Font.Underline.ToString());
                     //如果以上4个值都为false，regular的值就为true
                     //只要有一个为true，regular就为false
                     bool regular = textArea.Font.Bold || textArea.Font.Italic || textArea.Font.Strikeout || textArea.Font.Underline;
                     regular = !regular;
-                    FileUtil.writeConfigXml(new string[] { "setting", "font", "regular" }, regular.ToString());
+                    FileUtil.writeConfigXml(new string[] { "style", "font", "regular" }, regular.ToString());
                 }
                 catch (WriteXmlException e1)
                 {
@@ -449,13 +451,13 @@ namespace EncryptTextEditor
             //修改XML文件
             try
             {
-                FileUtil.writeConfigXml(new string[] { "setting", "font", "name" }, "微软雅黑");
-                FileUtil.writeConfigXml(new string[] { "setting", "font", "size" }, "12");
-                FileUtil.writeConfigXml(new string[] { "setting", "font", "regular" }, "true");
-                FileUtil.writeConfigXml(new string[] { "setting", "font", "bold" }, "false");
-                FileUtil.writeConfigXml(new string[] { "setting", "font", "italic" }, "false");
-                FileUtil.writeConfigXml(new string[] { "setting", "font", "strikeout" }, "false");
-                FileUtil.writeConfigXml(new string[] { "setting", "font", "underline" }, "false");
+                FileUtil.writeConfigXml(new string[] { "style", "font", "name" }, "微软雅黑");
+                FileUtil.writeConfigXml(new string[] { "style", "font", "size" }, "12");
+                FileUtil.writeConfigXml(new string[] { "style", "font", "regular" }, "true");
+                FileUtil.writeConfigXml(new string[] { "style", "font", "bold" }, "false");
+                FileUtil.writeConfigXml(new string[] { "style", "font", "italic" }, "false");
+                FileUtil.writeConfigXml(new string[] { "style", "font", "strikeout" }, "false");
+                FileUtil.writeConfigXml(new string[] { "style", "font", "underline" }, "false");
             }
             catch (WriteXmlException e1)
             {
