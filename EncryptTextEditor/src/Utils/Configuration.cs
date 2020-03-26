@@ -29,7 +29,7 @@ namespace EncryptTextEditor.Utils
 
         private static Configuration instance = null;
         private static readonly object padlock = new object();
-        public static string XML_PATH_CONFIG = Program.START_PATH + "/../../data/config.xml";
+        public static string XML_PATH_CONFIG = Program.START_PATH + "/../../user data/config.xml";
 
         bool firstStart = true;     //程序首次启动 在首次启动的正常关闭后，保存为false
         public int width = 868, height = 593;       //窗口宽高 默认在窗口点击关闭后保存

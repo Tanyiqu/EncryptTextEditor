@@ -11,6 +11,10 @@ namespace EncryptTextEditor.Utils
 {
     public static class CoreUtil
     {
+        public static string innerDllPath = "core.dll";     //程序自定义的dll路径
+        public static string outerDllPath = "core_.dll";    //用户自定义的dll路径
+
+
         //字符串加密成字节数组
         public static byte[] encode(string text)
         {

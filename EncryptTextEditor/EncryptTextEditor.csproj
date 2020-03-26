@@ -102,10 +102,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
-    <Content Include="data\config.xml" />
+    <Content Include="user data\config.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="res\" />
+    <Folder Include="x86\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
