@@ -410,6 +410,8 @@ namespace EncryptTextEditor.Forms
             //设置字体为当前文本的字体
             fontDialog.Font = textArea.Font;
 
+            
+
             if(fontDialog.ShowDialog() == DialogResult.OK)
             {
                 textArea.Font = fontDialog.Font;
@@ -418,6 +420,9 @@ namespace EncryptTextEditor.Forms
                 Console.WriteLine("Bold : " + textArea.Font.Bold);
                 Console.WriteLine("Strikeout : " + textArea.Font.Strikeout);
                 Console.WriteLine("Underline : " + textArea.Font.Underline);
+
+                //此时修改Config的字体也为当前字体
+                config.font = textArea.Font;
 
                 //保存配置到config.xml中
                 try

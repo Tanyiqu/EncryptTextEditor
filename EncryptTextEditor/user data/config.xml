@@ -9,9 +9,9 @@
     <!--主窗口高度-->
     <height>541</height>
     <!--窗口出现的x坐标-->
-    <x>493</x>
+    <x>563</x>
     <!--窗口出现的y坐标-->
-    <y>240</y>
+    <y>196</y>
   </app>
   <!--程序主题样式-->
   <style>
@@ -20,13 +20,15 @@
       <name>微软雅黑</name>
       <size>12</size>
       <!--如果regular为true的话，就不检查以下4个属性了-->
-      <regular>true</regular>
-      <bold>false</bold>
-      <italic>false</italic>
-      <strikeout>false</strikeout>
-      <underline>false</underline>
+      <regular>True</regular>
+      <bold>False</bold>
+      <italic>False</italic>
+      <strikeout>False</strikeout>
+      <underline>False</underline>
     </font>
+    <!--文本区域字体颜色-->
     <foreColor>#ffffff</foreColor>
+    <!--文本区域背景色-->
     <backColor>#293134</backColor>
   </style>
   <!--适配扩展名-->
