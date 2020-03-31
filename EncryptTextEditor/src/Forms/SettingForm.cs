@@ -21,6 +21,7 @@ namespace EncryptTextEditor.Forms
             InitializeComponent();
         }
 
+        //加载
         private void SettingForm_Load(object sender, EventArgs e)
         {
             //加载两个颜色框
@@ -29,7 +30,21 @@ namespace EncryptTextEditor.Forms
             //加载预览文字
             txtPreview.Font = config.font;
             txtPreview.ForeColor = config.foreColor;
-            txtPreview.BackColor = config.backColor;            
+            txtPreview.BackColor = config.backColor;
+
+            int n = 1;
+            //加载扩展名
+            foreach (Configuration.Extension ext in config.extensions)
+            {
+                int index = this.tableExts.Rows.Add();
+                tableExts.Rows[index].Cells[0].Value = ext.name;
+                tableExts.Rows[index].Cells[1].Value = ext.desc;
+                tableExts.Rows[index].HeaderCell.Value = n.ToString();//添加行号
+                n++;
+            }
+            Console.WriteLine("Conplete00");
+            
+            
         }
 
         //设置字体颜色
@@ -68,6 +83,7 @@ namespace EncryptTextEditor.Forms
         //确定
         private void btnConform_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("点击 确定");
             //应用改动 并 保存到配置文件
             //应用改动是将属性直接写到Config的实例中，然后调用Main的sync同步
             //不需要写入到文件中，再读取
@@ -91,5 +107,7 @@ namespace EncryptTextEditor.Forms
             }
             this.Close();
         }
+
+  
     }
 }

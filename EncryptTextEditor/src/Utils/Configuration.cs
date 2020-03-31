@@ -37,7 +37,7 @@ namespace EncryptTextEditor.Utils
         public Font font = new Font("微软雅黑", 12);//字体 在选择字体点击确认后保存 在点击恢复默认字体时保存
         public Color foreColor,backColor;
 
-        List<Extension> extensions = new List<Extension>(); //应用程序关联的扩展名
+        public List<Extension> extensions = new List<Extension>(); //应用程序关联的扩展名
 
         private Configuration()
         {
