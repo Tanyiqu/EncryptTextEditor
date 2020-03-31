@@ -78,9 +78,7 @@ namespace EncryptTextEditor.Utils
 
         //修改并保存xml文件的某个node的值
         //修改此程序的config.xml
-        //返回是否修改成功，不成功包括 一系列异常，里面抛出异常都认为它不成功
-        //可以支持修改<config>里的三级子结点，不包括<config>结点
-        public static void writeConfigXml(string[] nodes,string value) 
+        public static void writeConfigXmlNode(string[] nodes,string value) 
         {
             XmlDocument xmlConfig = new XmlDocument();
             //加载xml文件
@@ -125,7 +123,65 @@ namespace EncryptTextEditor.Utils
                 Console.WriteLine(e.Message);
                 throw new WriteXmlException("保存XML异常");
             }
+        }
 
+
+        //添加xml文件的extensions结点
+        public static void addConfigXml_Extensions(string name, string desc)
+        {
+            XmlDocument xmlConfig = new XmlDocument();
+            //加载xml文件
+            try
+            {
+                xmlConfig.Load(Configuration.XML_PATH_CONFIG);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new AddXmlException("加载XML异常");
+            }
+            //找到根节点
+            XmlNode extensions = null;
+            try
+            {
+                extensions = xmlConfig.SelectSingleNode("config");
+                extensions = extensions.SelectSingleNode("extensions");
+            }
+            catch (XmlException e)
+            {
+                throw new AddXmlException("选择结点异常 \n" + e.Message);
+            }
+            
+            //name --> extension
+            //desc --> extension
+            //extension --> extensions
+            try
+            {
+                XmlElement extension = xmlConfig.CreateElement("extension");
+                XmlElement Name = xmlConfig.CreateElement("name");
+                Name.InnerText = name;
+                XmlElement Desc = xmlConfig.CreateElement("desc");
+                Desc.InnerText = desc;
+                extension.AppendChild(Name);
+                extension.AppendChild(Desc);
+                extensions.AppendChild(extension);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new AddXmlException("添加XML结点异常");
+            }
+
+            //保存
+            try
+            {
+                xmlConfig.Save(Configuration.XML_PATH_CONFIG);
+            }
+            catch (XmlException e)
+            {
+                Console.WriteLine(e.Message);
+                throw new AddXmlException("保存XML异常");
+            }
         }
 
     }

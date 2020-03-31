@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.tabAdvance = new System.Windows.Forms.TabPage();
+            this.groupBoxExtensions = new System.Windows.Forms.GroupBox();
+            this.linkAddExt = new System.Windows.Forms.LinkLabel();
+            this.tableExts = new System.Windows.Forms.DataGridView();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabNormal = new System.Windows.Forms.TabPage();
             this.groupBoxStyle = new System.Windows.Forms.GroupBox();
             this.txtPreview = new System.Windows.Forms.TextBox();
@@ -44,21 +49,16 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnConform = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.groupBoxExtensions = new System.Windows.Forms.GroupBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.tableExts = new System.Windows.Forms.DataGridView();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabAdvance.SuspendLayout();
+            this.groupBoxExtensions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tableExts)).BeginInit();
             this.tabNormal.SuspendLayout();
             this.groupBoxStyle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForeColor)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tabControl.SuspendLayout();
-            this.groupBoxExtensions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tableExts)).BeginInit();
             this.SuspendLayout();
             // 
             // tabAdvance
@@ -71,6 +71,63 @@
             this.tabAdvance.TabIndex = 1;
             this.tabAdvance.Text = "高级";
             this.tabAdvance.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxExtensions
+            // 
+            this.groupBoxExtensions.Controls.Add(this.linkAddExt);
+            this.groupBoxExtensions.Controls.Add(this.tableExts);
+            this.groupBoxExtensions.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxExtensions.Name = "groupBoxExtensions";
+            this.groupBoxExtensions.Size = new System.Drawing.Size(366, 141);
+            this.groupBoxExtensions.TabIndex = 0;
+            this.groupBoxExtensions.TabStop = false;
+            this.groupBoxExtensions.Text = "扩展名";
+            // 
+            // linkAddExt
+            // 
+            this.linkAddExt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkAddExt.AutoSize = true;
+            this.linkAddExt.Location = new System.Drawing.Point(325, 120);
+            this.linkAddExt.Name = "linkAddExt";
+            this.linkAddExt.Size = new System.Drawing.Size(35, 12);
+            this.linkAddExt.TabIndex = 0;
+            this.linkAddExt.TabStop = true;
+            this.linkAddExt.Text = "添加+";
+            this.linkAddExt.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkAddExt_LinkClicked);
+            // 
+            // tableExts
+            // 
+            this.tableExts.AllowUserToAddRows = false;
+            this.tableExts.AllowUserToDeleteRows = false;
+            this.tableExts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableExts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.tableExts.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tableExts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tableExts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.name,
+            this.desc});
+            this.tableExts.Location = new System.Drawing.Point(6, 20);
+            this.tableExts.Name = "tableExts";
+            this.tableExts.ReadOnly = true;
+            this.tableExts.RowTemplate.Height = 23;
+            this.tableExts.Size = new System.Drawing.Size(354, 97);
+            this.tableExts.TabIndex = 1;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "扩展名";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // desc
+            // 
+            this.desc.HeaderText = "描述";
+            this.desc.Name = "desc";
+            this.desc.ReadOnly = true;
+            this.desc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // tabNormal
             // 
@@ -239,17 +296,6 @@
             this.tabControl.Size = new System.Drawing.Size(386, 417);
             this.tabControl.TabIndex = 0;
             // 
-            // groupBoxExtensions
-            // 
-            this.groupBoxExtensions.Controls.Add(this.linkLabel1);
-            this.groupBoxExtensions.Controls.Add(this.tableExts);
-            this.groupBoxExtensions.Location = new System.Drawing.Point(6, 6);
-            this.groupBoxExtensions.Name = "groupBoxExtensions";
-            this.groupBoxExtensions.Size = new System.Drawing.Size(366, 141);
-            this.groupBoxExtensions.TabIndex = 0;
-            this.groupBoxExtensions.TabStop = false;
-            this.groupBoxExtensions.Text = "扩展名";
-            // 
             // tabPage1
             // 
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -260,57 +306,13 @@
             this.tabPage1.Text = "关于";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(331, 120);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(29, 12);
-            this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "添加";
-            // 
-            // tableExts
-            // 
-            this.tableExts.AllowUserToAddRows = false;
-            this.tableExts.AllowUserToDeleteRows = false;
-            this.tableExts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableExts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.tableExts.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.tableExts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tableExts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.name,
-            this.desc});
-            this.tableExts.Location = new System.Drawing.Point(6, 20);
-            this.tableExts.Name = "tableExts";
-            this.tableExts.ReadOnly = true;
-            this.tableExts.RowTemplate.Height = 23;
-            this.tableExts.Size = new System.Drawing.Size(354, 97);
-            this.tableExts.TabIndex = 1;
-            // 
-            // name
-            // 
-            this.name.HeaderText = "扩展名";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // desc
-            // 
-            this.desc.HeaderText = "描述";
-            this.desc.Name = "desc";
-            this.desc.ReadOnly = true;
-            this.desc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 437);
             this.Controls.Add(this.tabControl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(422, 476);
             this.MinimizeBox = false;
@@ -321,6 +323,9 @@
             this.Text = "首选项";
             this.Load += new System.EventHandler(this.SettingForm_Load);
             this.tabAdvance.ResumeLayout(false);
+            this.groupBoxExtensions.ResumeLayout(false);
+            this.groupBoxExtensions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tableExts)).EndInit();
             this.tabNormal.ResumeLayout(false);
             this.groupBoxStyle.ResumeLayout(false);
             this.groupBoxStyle.PerformLayout();
@@ -329,9 +334,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabControl.ResumeLayout(false);
-            this.groupBoxExtensions.ResumeLayout(false);
-            this.groupBoxExtensions.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tableExts)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -356,7 +358,7 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.GroupBox groupBoxExtensions;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linkAddExt;
         private System.Windows.Forms.DataGridView tableExts;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn desc;

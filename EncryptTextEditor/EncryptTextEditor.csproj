@@ -58,12 +58,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Forms\Dialogs\AddExtDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\Forms\Dialogs\AddExtDialog.Designer.cs">
+      <DependentUpon>AddExtDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\Forms\SettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="src\Forms\SettingForm.Designer.cs">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\MyExceptions\AddXmlException.cs" />
     <Compile Include="src\MyExceptions\WriteXmlException.cs" />
     <Compile Include="src\Utils\Configuration.cs" />
     <Compile Include="src\Utils\CoreUtil.cs" />
@@ -76,6 +83,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Utils\FileUtil.cs" />
+    <EmbeddedResource Include="src\Forms\Dialogs\AddExtDialog.resx">
+      <DependentUpon>AddExtDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

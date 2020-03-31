@@ -9,9 +9,9 @@
     <!--主窗口高度-->
     <height>541</height>
     <!--窗口出现的x坐标-->
-    <x>333</x>
+    <x>565</x>
     <!--窗口出现的y坐标-->
-    <y>356</y>
+    <y>180</y>
   </app>
   <!--程序主题样式-->
   <style>
@@ -40,6 +40,10 @@
     <extension>
       <name>*.act</name>
       <desc>账户文件</desc>
+    </extension>
+    <extension>
+      <name>000</name>
+      <desc>111</desc>
     </extension>
   </extensions>
 </config>

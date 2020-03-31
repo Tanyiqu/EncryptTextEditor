@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using EncryptTextEditor.Forms.Dialogs;
 using EncryptTextEditor.Utils;
+using EncryptTextEditor.MyExceptions;
 
 namespace EncryptTextEditor.Forms
 {
@@ -42,7 +44,6 @@ namespace EncryptTextEditor.Forms
                 tableExts.Rows[index].HeaderCell.Value = n.ToString();//添加行号
                 n++;
             }
-            Console.WriteLine("Conplete00");
             
             
         }
@@ -98,14 +99,46 @@ namespace EncryptTextEditor.Forms
             int rgbBack = config.backColor.ToArgb() & 0xFFFFFF;
             try
             {
-                FileUtil.writeConfigXml(new string[] { "style", "foreColor" }, "#" + rgbFore.ToString("X6"));
-                FileUtil.writeConfigXml(new string[] { "style", "backColor" }, "#" + rgbBack.ToString("X6"));
+                FileUtil.writeConfigXmlNode(new string[] { "style", "foreColor" }, "#" + rgbFore.ToString("X6"));
+                FileUtil.writeConfigXmlNode(new string[] { "style", "backColor" }, "#" + rgbBack.ToString("X6"));
             }
-            catch (EncryptTextEditor.MyExceptions.WriteXmlException e1)
+            catch (WriteXmlException e1)
             {
                 Console.WriteLine("保存颜色时写入Xml失败");
+                Console.WriteLine(e1.Message);
             }
             this.Close();
+        }
+
+        //添加扩展名
+        private void linkAddExt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            AddExtDialog dialog = new AddExtDialog();
+            DialogResult rc = dialog.ShowDialog(this);
+            if (rc == DialogResult.OK)
+            {
+                string name = dialog.name;
+                string desc = dialog.desc;
+                Console.WriteLine(name + " " + desc);
+                //添加到表格中
+                int index = this.tableExts.Rows.Add();
+                tableExts.Rows[index].Cells[0].Value = name;
+                tableExts.Rows[index].Cells[1].Value = desc;
+                tableExts.Rows[index].HeaderCell.Value = (index+1).ToString();//添加行号
+                tableExts.ClearSelection();
+                tableExts.Rows[index].Cells[0].Selected = true;
+                //添加到config.xml中
+                try
+                {
+                    FileUtil.addConfigXml_Extensions(name, desc);
+                }
+                catch (AddXmlException e1)
+                {
+                    Console.WriteLine("添加扩展名时写入Xml失败");
+                    Console.WriteLine(e1.Message);
+                }
+            }
+            dialog.Dispose();
         }
 
   
