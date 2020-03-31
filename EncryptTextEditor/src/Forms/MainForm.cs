@@ -16,6 +16,8 @@ namespace EncryptTextEditor.Forms
 {
     public partial class MainForm : Form
     {
+        private static readonly object padlock = new object();
+        private static MainForm instance = null;
         string[] args;          //参数
         string filePath;        //打开的文件路径
         bool modified = false;  //文本是否被改动过，在关闭窗口时用到
@@ -27,7 +29,26 @@ namespace EncryptTextEditor.Forms
 
         SettingForm settingForm = null;
 
-        public MainForm(string[] args)
+        //第一次使用时，调用此函数
+        public static MainForm Instance(string[] args)
+        {
+            lock (padlock)
+            {
+                if (instance == null)
+                {
+                    instance = new MainForm(args);
+                }
+                return instance;
+            }
+        }
+
+        //外部调用时，使用此函数
+        public static MainForm getInstance()
+        {
+            return instance;
+        }
+
+        private MainForm(string[] args)
         {
             InitializeComponent();
             this.args = args;
@@ -37,6 +58,15 @@ namespace EncryptTextEditor.Forms
         {
             Console.WriteLine("应用加载的配置\n");
 
+            sync();
+
+        }
+
+        //根据config同步外部的设置
+        public void sync()
+        {
+            //根据配置文件刷新设置
+            Console.WriteLine("同步外部的设置");
             //窗口大小
             this.Size = new Size(config.width, config.height);
             //窗口位置
@@ -47,7 +77,6 @@ namespace EncryptTextEditor.Forms
             this.textArea.ForeColor = config.foreColor;
             //背景颜色
             this.textArea.BackColor = config.backColor;
-
         }
 
         //加载窗口，并判断是否有携带参数
@@ -503,6 +532,7 @@ namespace EncryptTextEditor.Forms
         {
             Console.WriteLine("关于");
         }
+
 
 
     }

@@ -22,7 +22,7 @@ namespace EncryptTextEditor
             //打印可执行文件的路径
             Console.WriteLine("可执行文件路径：" + START_PATH);
 
-            Application.Run(new MainForm(args));
+            Application.Run(MainForm.Instance(args));
         }
     }
 }

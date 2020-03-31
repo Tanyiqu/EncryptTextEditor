@@ -9,9 +9,9 @@
     <!--主窗口高度-->
     <height>541</height>
     <!--窗口出现的x坐标-->
-    <x>563</x>
+    <x>333</x>
     <!--窗口出现的y坐标-->
-    <y>196</y>
+    <y>356</y>
   </app>
   <!--程序主题样式-->
   <style>
@@ -27,7 +27,7 @@
       <underline>False</underline>
     </font>
     <!--文本区域字体颜色-->
-    <foreColor>#ffffff</foreColor>
+    <foreColor>#FFFFFF</foreColor>
     <!--文本区域背景色-->
     <backColor>#293134</backColor>
   </style>

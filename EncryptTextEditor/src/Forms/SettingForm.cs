@@ -14,6 +14,7 @@ namespace EncryptTextEditor.Forms
     {
 
         Configuration config = Configuration.Instance;
+        MainForm mainForm = MainForm.getInstance();
 
         public SettingForm()
         {
@@ -61,6 +62,27 @@ namespace EncryptTextEditor.Forms
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Console.WriteLine("点击 取消");
+            this.Close();
+        }
+
+        //确定
+        private void btnConform_Click(object sender, EventArgs e)
+        {
+            //应用改动 并 保存到配置文件
+            //应用改动是将属性直接写到Config的实例中，然后调用Main的sync同步
+            //不需要写入到文件中，再读取
+
+            //应用
+            config.foreColor = pictureBoxForeColor.BackColor;
+            config.backColor = pictureBoxBackColor.BackColor;
+            mainForm.sync();
+            //保存到Config.xml
+            //保存颜色
+            int rgbFore = config.foreColor.ToArgb() & 0xFFFFFF;
+            int rgbBack = config.backColor.ToArgb() & 0xFFFFFF;
+            FileUtil.writeConfigXml(new string[] { "style", "foreColor" }, "#" + rgbFore.ToString("X6")); 
+            FileUtil.writeConfigXml(new string[] { "style", "backColor" }, "#" + rgbBack.ToString("X6"));
+            this.Close();
         }
     }
 }

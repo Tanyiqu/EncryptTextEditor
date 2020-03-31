@@ -31,19 +31,19 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabNormal = new System.Windows.Forms.TabPage();
             this.groupBoxStyle = new System.Windows.Forms.GroupBox();
+            this.txtPreview = new System.Windows.Forms.TextBox();
             this.pictureBoxBackColor = new System.Windows.Forms.PictureBox();
             this.pictureBoxForeColor = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnConform = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtPreview = new System.Windows.Forms.TextBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.tabNormal.SuspendLayout();
             this.groupBoxStyle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackColor)).BeginInit();
@@ -92,6 +92,17 @@
             this.groupBoxStyle.TabStop = false;
             this.groupBoxStyle.Text = "主题样式";
             // 
+            // txtPreview
+            // 
+            this.txtPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPreview.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtPreview.Location = new System.Drawing.Point(163, 20);
+            this.txtPreview.Multiline = true;
+            this.txtPreview.Name = "txtPreview";
+            this.txtPreview.Size = new System.Drawing.Size(177, 50);
+            this.txtPreview.TabIndex = 3;
+            this.txtPreview.Text = "加密文本编辑器";
+            // 
             // pictureBoxBackColor
             // 
             this.pictureBoxBackColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -124,6 +135,15 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "背景颜色：";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(116, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 12);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "预览：";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -143,6 +163,18 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "警告框";
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.Location = new System.Drawing.Point(12, 42);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(168, 16);
+            this.checkBox2.TabIndex = 0;
+            this.checkBox2.Text = "字数过多时显示警告对话框";
+            this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // checkBox1
             // 
@@ -183,6 +215,7 @@
             this.btnConform.TabIndex = 1;
             this.btnConform.Text = "确定";
             this.btnConform.UseVisualStyleBackColor = true;
+            this.btnConform.Click += new System.EventHandler(this.btnConform_Click);
             // 
             // tabControl
             // 
@@ -194,38 +227,6 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(386, 417);
             this.tabControl.TabIndex = 0;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(116, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 12);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "预览：";
-            // 
-            // txtPreview
-            // 
-            this.txtPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPreview.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtPreview.Location = new System.Drawing.Point(163, 20);
-            this.txtPreview.Multiline = true;
-            this.txtPreview.Name = "txtPreview";
-            this.txtPreview.Size = new System.Drawing.Size(177, 50);
-            this.txtPreview.TabIndex = 3;
-            this.txtPreview.Text = "加密文本编辑器";
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Checked = true;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(12, 42);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(168, 16);
-            this.checkBox2.TabIndex = 0;
-            this.checkBox2.Text = "字数过多时显示警告对话框";
-            this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // SettingForm
             // 
