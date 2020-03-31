@@ -80,8 +80,15 @@ namespace EncryptTextEditor.Forms
             //保存颜色
             int rgbFore = config.foreColor.ToArgb() & 0xFFFFFF;
             int rgbBack = config.backColor.ToArgb() & 0xFFFFFF;
-            FileUtil.writeConfigXml(new string[] { "style", "foreColor" }, "#" + rgbFore.ToString("X6")); 
-            FileUtil.writeConfigXml(new string[] { "style", "backColor" }, "#" + rgbBack.ToString("X6"));
+            try
+            {
+                FileUtil.writeConfigXml(new string[] { "style", "foreColor" }, "#" + rgbFore.ToString("X6"));
+                FileUtil.writeConfigXml(new string[] { "style", "backColor" }, "#" + rgbBack.ToString("X6"));
+            }
+            catch (EncryptTextEditor.MyExceptions.WriteXmlException e1)
+            {
+                Console.WriteLine("保存颜色时写入Xml失败");
+            }
             this.Close();
         }
     }
